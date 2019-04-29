@@ -8,11 +8,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,21 +23,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
 @Table(name = "Address")
 public class Address{
 
 	@Id
 	@Column(name = "addressId", columnDefinition = "nvarchar(60)", nullable=false, unique=true)
+	@Size(min = 36, max = 36, message = "Something went please try again")
 	private String addressId;
+	
 	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "empId", nullable=false)
+//	@Size(min = 36, max = 36, message = "Something went please try again")
 	private Employee employee;
+	
 	@Column(name = "city",columnDefinition = "varchar(45)")
+	@Size(min = 2, max = 20)
 	private String city;
+	
 	@Column(name = "state",columnDefinition = "varchar(45)")
+	@Size(min = 2, max = 20)
 	private String state;
+	
 	@Column(name = "contactNo",columnDefinition = "numeric(10)")
 	private long contactNo;
 	

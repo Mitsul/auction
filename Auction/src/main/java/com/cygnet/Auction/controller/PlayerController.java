@@ -1,6 +1,9 @@
 package com.cygnet.Auction.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +23,11 @@ public class PlayerController {
 	@Autowired PlayerService playerService;
 
 	@PostMapping(value="/player/register")
-	public String addPlayer(@RequestBody PlayerDto playerDto) {
-		return playerService.addPlayer(playerDto);
+	public String addPlayer(@Valid @RequestBody PlayerDto playerDto, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return playerService.addPlayer(playerDto);
 	}
 	
 	@GetMapping(value="/player/{empId}")
@@ -30,7 +36,10 @@ public class PlayerController {
 	}
 	
 	@PutMapping(value="/player/update")
-	public String updatePlayer(@RequestBody PlayerDto playerDto) {
-		return playerService.updatePlayer(playerDto);
+	public String updatePlayer(@Valid @RequestBody PlayerDto playerDto, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return playerService.updatePlayer(playerDto);
 	}
 }

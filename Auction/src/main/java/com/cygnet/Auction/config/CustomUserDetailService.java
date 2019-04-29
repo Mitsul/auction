@@ -26,6 +26,7 @@ public class CustomUserDetailService implements UserDetailsService {
 	
 	Employee emp = new Employee();
 	
+	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 	Employee user = employeeRepository.findByEmail(username);
@@ -39,17 +40,16 @@ public class CustomUserDetailService implements UserDetailsService {
 	{
 		emp = user;
 		System.out.println("loadUserByUsername "+user.toString()+" Role: "+user.getRoles());
-		List<GrantedAuthority> authorityListAdmin = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");
-		List<GrantedAuthority> authorityListUser = AuthorityUtils.createAuthorityList("ROLE_USER");
+		List<GrantedAuthority> authorityListAdmin = AuthorityUtils.createAuthorityList("ROLE_ADMIN");
+		List<GrantedAuthority> authorityListEmployee = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");
 		return new org.springframework.security.core.userdetails.User
-			(user.getEmail(), user.getPassword(), user.getRoles().equals("ROLE_EMPLOYEE") ? authorityListAdmin : authorityListUser);
+			(user.getEmail(), user.getPassword(), user.getRoles().equals("ROLE_ADMIN") ? authorityListAdmin : authorityListEmployee);
 	
 		}
 	}
 	
 	@Override
 	public boolean equals(Object objUser) {
-		// TODO Auto-generated method stub
 		System.out.println((objUser instanceof User));
 		if(objUser == null) return false;
 		else if (!(objUser instanceof User)) return false;
@@ -58,7 +58,6 @@ public class CustomUserDetailService implements UserDetailsService {
 	
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
 	

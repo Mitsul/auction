@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -29,9 +30,11 @@ public class TeamName {
 	
 	@Id
 	@Column(name = "teamNameId",columnDefinition = "nvarchar(60)")
+	@Size(min = 36, max = 36, message = "Something went please try again")
 	private String teamNameId;
 	
 	@Column(name = "Name",columnDefinition = "varchar(45)")
+	@Size(min = 2, max = 20, message = "Something went, the size for the team name should be between 2 to 20")
 	private String Name;
 	
 	@JsonBackReference

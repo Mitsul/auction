@@ -4,8 +4,9 @@ import java.util.List;
 
 import javax.persistence.OptimisticLockException;
 
-import org.apache.log4j.Logger;
 import org.hibernate.StaleObjectStateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import com.cygnet.Auction.util.UuidAndTimeStamp;
 @Service
 public class TokenServiceImpl implements TokenService{
 	
-	private final static Logger logger = Logger.getLogger(TokenServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(TokenServiceImpl.class);
 
 	@Autowired private TokenRepository tokenRepository;
 	@Autowired private CaptainRepository captainRepository;

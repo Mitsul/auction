@@ -1,6 +1,7 @@
 package com.cygnet.Auction.serviceImpl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,7 +24,7 @@ import com.cygnet.Auction.util.UuidAndTimeStamp;
 @Service
 public class TransactionServiceImpl {
 	
-	private final static Logger logger = Logger.getLogger(TransactionServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);
 
 	@Autowired	private AuctionRepository auctionRepository;
 	@Autowired	private BiddingRepository biddingRepository;

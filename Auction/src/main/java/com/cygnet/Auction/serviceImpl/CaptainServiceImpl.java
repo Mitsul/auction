@@ -5,8 +5,9 @@ import java.util.List;
 
 import javax.persistence.OptimisticLockException;
 
-import org.apache.log4j.Logger;
 import org.hibernate.StaleObjectStateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ import com.cygnet.Auction.util.UuidAndTimeStamp;
 @Service
 public class CaptainServiceImpl implements CaptainService{
 	
-	private final static Logger logger = Logger.getLogger(CaptainServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(CaptainServiceImpl.class);
 
 	@Autowired private CaptainRepository captainRepository;
 	@Autowired private Captain_ReviewRepository captain_ReviewRepository;
@@ -47,7 +48,7 @@ public class CaptainServiceImpl implements CaptainService{
 	}
 	
 	public String addCaptains(int size) {
-		logger.info("Wirh in addCaptains");
+		logger.info("With in addCaptains");
 		try {
 			List<ReturnCapFromCapReviewDto> captainList = captain_ReviewRepository.findAllCaptain();
 			List<Captain> captains = captainRepository.findAll();
@@ -94,12 +95,12 @@ public class CaptainServiceImpl implements CaptainService{
 		if(player != null) {
 			Captain captain =  captainRepository.findByPlayer(player);
 			if(captain != null)
-				return "This employee is a captain";
+				return "1";
 			else
-				return "This employee is not an catain";
+				return "0";
 		}
 		else {
-			return "This employeee is not registered as a player";
+			return "0";
 		}
 	}
 }

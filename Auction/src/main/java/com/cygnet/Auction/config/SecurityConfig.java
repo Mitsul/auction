@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 	}
-	
+//	
 //	@Autowired
 //	private JwtAuthenticationEntryPoint unauthorizedHandler;
 //	
@@ -57,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 		web
 		.ignoring()
 		.antMatchers("/employee/login/")
-		.antMatchers("/employee/login")
 		.antMatchers("http://192.168.100.36:4200/**")
 		.antMatchers(HttpMethod.OPTIONS,"/**");
 	}
@@ -67,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 		http
 		.csrf().disable()
 		.authorizeRequests()
-		.antMatchers("/**").permitAll()
+//		.antMatchers("/**").permitAll()
 		.antMatchers(HttpMethod.POST,"/employee/login/").permitAll()
 		.antMatchers("http://192.168.100.36:8088/**").permitAll()
 		.antMatchers("http://localhost:4200/login").permitAll()
@@ -91,8 +90,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/employee/login/")
+//		.loginPage("/employee/login/")
 		.loginProcessingUrl("/employee/login/")
+		.loginProcessingUrl("/admin/login")
 		.and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager(), customUserDetailService))
 		.addFilter(new JWTAuthorizationFilter(authenticationManager(), customUserDetailService));

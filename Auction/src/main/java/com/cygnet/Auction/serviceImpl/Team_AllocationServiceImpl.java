@@ -3,7 +3,8 @@ package com.cygnet.Auction.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ import com.cygnet.Auction.util.UuidAndTimeStamp;
 @Service
 public class Team_AllocationServiceImpl implements Team_AllocationService{
 	
-	private final static Logger logger = Logger.getLogger(Team_AllocationServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(Team_AllocationServiceImpl.class);
 
 	@Autowired private Team_AllocationRepository team_AllocationRepository;
 	@Autowired private BiddingRepository biddingRepository;

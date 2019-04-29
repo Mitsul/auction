@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -29,9 +30,11 @@ public class PlayerRole {
 
 	@Id
 	@Column(name = "playerRoleId",columnDefinition = "nvarchar(60)")
+	@Size(min = 36, max = 36, message = "Something went please try again")
 	private String playerRoleId;
 	
 	@Column(name = "name", columnDefinition = "nvarchar(25)")
+	@Size(min = 6, max = 25, message = "Something went please, the length of the player role should be between 6 to 25")
 	private String name;
 	
 	@JsonBackReference

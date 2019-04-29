@@ -1,9 +1,11 @@
 package com.cygnet.Auction.serviceImpl;
 
 import javax.persistence.OptimisticLockException;
+import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.hibernate.StaleObjectStateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ import com.cygnet.Auction.util.UuidAndTimeStamp;
 @Service
 public class AddressServiceImpl implements AddressService{
 	
-	private final static Logger logger = Logger.getLogger(AddressServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(AddressServiceImpl.class);
 
 	@Autowired private AddressRepository addressRepository;
 	@Autowired private EmployeeRepository employeeRepository;
@@ -32,7 +34,7 @@ public class AddressServiceImpl implements AddressService{
 		try {
 			address.setAddressId(uuidAndTimeStamp.getUuid());
 			if (emp!= null) {
-				Address a1 = new Address(address.getAddressId(),emp,address.getCity(),address.getState(),address.getContactNo());
+				@Valid Address a1 = new Address(address.getAddressId(),emp,address.getCity(),address.getState(),address.getContactNo());
 				addressRepository.save(a1);		
 				return "Address submitted successfully.";
 			}
@@ -43,7 +45,7 @@ public class AddressServiceImpl implements AddressService{
 			return "Please try again, due to exception of locking :-" + e;
 		}catch (Exception e){
 			logger.error("Error with in addAddress for emp " + emp.getName() + " id is " + emp.getEmpId() + " error :- " + e);
-			return "Please try again, due to exception :-\" + e";
+			return "Please try again, due to exception :- " + e	;
 		}
 	}
 

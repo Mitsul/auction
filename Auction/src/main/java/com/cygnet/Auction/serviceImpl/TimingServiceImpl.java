@@ -1,13 +1,12 @@
 package com.cygnet.Auction.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.OptimisticLockException;
 
-import org.apache.log4j.Logger;
 import org.hibernate.StaleObjectStateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -15,13 +14,14 @@ import org.springframework.stereotype.Service;
 import com.cygnet.Auction.dto.TimingDto;
 import com.cygnet.Auction.model.Timing;
 import com.cygnet.Auction.repository.TimingRepository;
+import com.cygnet.Auction.responseDto.ResponseTimingDto;
 import com.cygnet.Auction.service.TimingService;
 import com.cygnet.Auction.util.UuidAndTimeStamp;
 
 @Service
 public class TimingServiceImpl implements TimingService{
 	
-	private final static Logger logger = Logger.getLogger(TimingServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(TimingServiceImpl.class);
 
 	@Autowired private TimingRepository timingRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
@@ -44,10 +44,10 @@ public class TimingServiceImpl implements TimingService{
 		}
 	}
 
-	public Optional<Timing> getTiming(String timeId) {
+	public ResponseTimingDto getTiming(String timeId) {
 		logger.info("Wth in getTiming");
 		try {
-			return timingRepository.findById(timeId);
+			return timingRepository.findByTimeId(timeId);
 		}catch (Exception e) {
 			logger.error("Error with in getTiming :- " + e);
 			return null;
@@ -72,16 +72,8 @@ public class TimingServiceImpl implements TimingService{
 		
 	}
 
-	public List<Timing> getAllTiming() {
+	public List<ResponseTimingDto> getAllTiming() {
 		logger.info("With in getAllTiming");
-		try {
-			List<Timing> timing = new ArrayList<>();
-			timingRepository.findAll().forEach(timing :: add);
-			return timing;
-		}
-		catch (Exception e) {
-			logger.error("Error with in getAllTiming :- " + e);
-			return null;
-		}
+		return timingRepository.getAllTiming();
 	}
 }

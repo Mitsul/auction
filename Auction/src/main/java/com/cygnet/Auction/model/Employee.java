@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -32,17 +34,26 @@ public class Employee{
 
 	@Id
 	@Column(name = "empId", columnDefinition = "nvarchar(60)", unique = true)
+	@Size(min = 36, max = 36, message = "Something went please try again")
 	private String empId;
+	
 	@Column(name = "email", columnDefinition = "varchar(50)", unique = true)
+	@Email
 	private String email;
+	
 	@Column(name = "name", columnDefinition = "varchar(45)")
+	@Size(min = 3, max = 25, message = "The length of the name should be between 3 to 25")
 	private String name;
+	
 	@Column(name = "gender", columnDefinition = "varchar(6)")
+	@Size(min = 4, max = 6, message = "Something went wrong with the gender, please try again")
 	private String gender;
+	
 	@Column(name = "password", columnDefinition = "nvarchar(255)")
 	private String password;
 
 	@Column(name = "roles", columnDefinition = "nvarchar(25)")
+	@Size(min = 10, max = 13, message = "Something went with the role, please try again")
 	private String roles;
 	
 	@JsonBackReference
@@ -92,4 +103,5 @@ public class Employee{
 		this.player = player;
 		this.address = address;
 	}
+
 }

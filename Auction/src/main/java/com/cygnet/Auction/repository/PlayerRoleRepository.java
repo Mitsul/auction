@@ -8,4 +8,6 @@ import com.cygnet.Auction.model.PlayerRole;
 @Component
 public interface PlayerRoleRepository extends JpaRepository<PlayerRole, String>{
 
+	PlayerRole findByPlayerRoleId(String id);
+
 }

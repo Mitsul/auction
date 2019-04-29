@@ -2,7 +2,10 @@ package com.cygnet.Auction.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +31,11 @@ public class Captain_ReviewController {
 	}
 	
 	@PostMapping(value = "/giveReview")
-	public String giveReview(@RequestBody Captain_ReviewDto captain_ReviewDto) {
-		return captain_ReviewService.giveReview(captain_ReviewDto);
+	public String giveReview(@Valid @RequestBody Captain_ReviewDto captain_ReviewDto, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return captain_ReviewService.giveReview(captain_ReviewDto);
 	}
 	
 	@GetMapping(value = "/getReview/{empId}")
@@ -38,7 +44,10 @@ public class Captain_ReviewController {
 	}
 	
 	@PutMapping(value = "/updateReview")
-	public String updateReview(@RequestBody Captain_ReviewDto captain_ReviewDto) {
-		return captain_ReviewService.updateReview(captain_ReviewDto);
+	public String updateReview(@Valid @RequestBody Captain_ReviewDto captain_ReviewDto, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return captain_ReviewService.updateReview(captain_ReviewDto);
 	}
 }

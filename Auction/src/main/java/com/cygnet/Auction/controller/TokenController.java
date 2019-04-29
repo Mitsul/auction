@@ -16,7 +16,7 @@ public class TokenController {
 
 	@Autowired TokenService tokenService;
 	
-	@GetMapping(value = "/admin/getAllTokens")
+	@GetMapping(value = {"/admin/getAllTokens","/employee/getAllTokens"})
 	public List<ResponseCaptainTokenDto> getTokens(){
 		return tokenService.getTokens();
 	}

@@ -1,11 +1,15 @@
 package com.cygnet.Auction.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.OptimisticLockException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
-import org.apache.log4j.Logger;
 import org.hibernate.StaleObjectStateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -28,7 +32,7 @@ import com.cygnet.Auction.util.UuidAndTimeStamp;
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 	
-	private final static Logger logger = Logger.getLogger(EmployeeServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
@@ -39,10 +43,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public String addEmployee(EmployeeDto emp) {
 		logger.info("With in addEmployee");
 		try {
-			emp.setEmpId(uuidAndTimeStamp.getUuid());
-			Employee e1 = new Employee(emp.getEmpId(), emp.getEmail(),emp.getName(), emp.getGender(),emp.getPassword(),emp.getRoles());
-			employeeRepository.save(e1);
-			return "Player created successfully.";
+			if(employeeRepository.findByEmail(emp.getEmail()) == null ) {
+				emp.setEmpId(uuidAndTimeStamp.getUuid());
+				Employee e1 = new Employee(emp.getEmpId(), emp.getEmail(),emp.getName(), emp.getGender(),emp.getPassword(),emp.getRoles());
+				employeeRepository.save(e1);
+				return "Player created successfully.";
+			}
+			else
+				return "Player already exist with this email id";
 		}catch (OptimisticLockException | StaleObjectStateException | HibernateOptimisticLockingFailureException e) {
 			logger.error("Error with in addPlayer :- " + e);
 			return "Please try again, due to exception of locking :-" + e;
@@ -125,6 +133,19 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}catch (Exception e) {
 			logger.error("Error with in findByEmail :- " + e);
 			return null;
+		}
+	}
+
+	@Override
+	public List<Employee> getAllEmployee() {
+		logger.info("With in getAllEmployee");
+		try {
+			List<Employee> allEmp = new ArrayList<>();
+			employeeRepository.findAll().forEach(allEmp :: add);
+			return allEmp;
+		}catch (Exception e) {
+			logger.error("Error with in getAllEmployees :- " + e);
+			return null; 
 		}
 	}
 

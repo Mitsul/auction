@@ -15,7 +15,7 @@ import com.cygnet.Auction.model.Player;
 import com.cygnet.Auction.model.PlayerRole;
 import com.cygnet.Auction.responseDto.ResponsePlayerDto;
 import com.cygnet.Auction.responseDto.ResponsePlayersWithCapPrefDto;
-import com.cygnet.Auction.responseDto.responsePlayersForBid;
+import com.cygnet.Auction.responseDto.ResponsePlayersForBid;
 
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, String> {
@@ -26,8 +26,8 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "update Player set prefCaptain = ?2, isActive = ?3, updatedOn = ?4, playerRole = ?5 where playerId = ?1")
-	void setPlayerInfoById(String playerId, int prefCaptain, int isActive, Date updatedOn, PlayerRole playerRole);
+	@Query(value = "update Player set prefCaptain = ?2, isActive = ?3, updatedOn = ?4, playerRole = ?5 where employee.empId = ?1")
+	void setPlayerInfoById(String empId, int prefCaptain, int isActive, Date updatedOn, PlayerRole playerRole);
 
 	@Modifying
 	@Transactional
@@ -37,7 +37,7 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
 	Player findByPlayerId(String playerId); // for captain_reviewService
 
 	List<Player> getPlayersForBid(int flag); // used for named query
-	List<responsePlayersForBid> getPlayersForBidInAuction(int flag); // used for named query
+	List<ResponsePlayersForBid> getPlayersForBidInAuction(int flag); // used for named query
 
 	Player findByEmployee(Employee emp);
 	

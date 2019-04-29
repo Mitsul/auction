@@ -2,7 +2,10 @@ package com.cygnet.Auction.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +24,11 @@ public class Player_StatController {
 	@Autowired Player_StatService player_StatService;
 
 	@PostMapping(value = "/admin/playerStat/add")
-	public String adminAddPlayerStat(@RequestBody Player_StatDto player_StatDto) {
-		return player_StatService.adminAddPlayerStat(player_StatDto);
+	public String adminAddPlayerStat(@Valid @RequestBody Player_StatDto player_StatDto, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return player_StatService.adminAddPlayerStat(player_StatDto);
 	}
 	
 	@GetMapping(value="/admin/playerStat/getAllEmp")
@@ -36,7 +42,9 @@ public class Player_StatController {
 	}
 	
 	@PutMapping(value="/admin/playerStat/update")
-	public String adminUpdatePlayerStat(@RequestBody Player_StatDto player_StatDto) {
+	public String adminUpdatePlayerStat(@Valid @RequestBody Player_StatDto player_StatDto,Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
 		return player_StatService.updatePlayerStat(player_StatDto);
 	}
 	

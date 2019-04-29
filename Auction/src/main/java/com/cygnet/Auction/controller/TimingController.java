@@ -1,18 +1,18 @@
 package com.cygnet.Auction.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cygnet.Auction.dto.TimingDto;
-import com.cygnet.Auction.model.Timing;
+import com.cygnet.Auction.responseDto.ResponseTimingDto;
 import com.cygnet.Auction.service.TimingService;
 
 @RestController
@@ -25,8 +25,8 @@ public class TimingController {
 		return timingService.addTiming(timingDto);
 	}
 	
-	@PostMapping(value="/admin/timing/get")
-	public Optional<Timing> getTiming(@RequestParam String timeId) {
+	@GetMapping(value= {"/admin/timing/get/{timeId}","/employee/timing/get/{timeId}"})
+	public ResponseTimingDto getTiming(@PathVariable("timeId") String timeId) {
 		return timingService.getTiming(timeId);
 	}
 	
@@ -35,8 +35,8 @@ public class TimingController {
 		return timingService.updateTiming(timingDto);
 	}
 	
-	@PostMapping(value= {"/admin/timing/getall", "/employee/timing/getall"})
-	public List<Timing> getAllTiming(){
+	@GetMapping(value= {"/admin/timing/getall", "/employee/timing/getall"})
+	public List<ResponseTimingDto> getAllTiming(){
 		return timingService.getAllTiming();
 	}
 }

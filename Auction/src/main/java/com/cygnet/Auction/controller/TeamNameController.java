@@ -2,7 +2,10 @@ package com.cygnet.Auction.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,13 +22,19 @@ public class TeamNameController {
 	@Autowired TeamNameService teamNameService;
 	
 	@PostMapping(value = "/admin/teamName/add")
-	public String addTeamName(@RequestBody TeamNameDto teamNameDto) {
-		return teamNameService.addTeamName(teamNameDto);
+	public String addTeamName(@Valid @RequestBody TeamNameDto teamNameDto, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return teamNameService.addTeamName(teamNameDto);
 	}
 	
 	@PutMapping(value="/admin/teamName/update")
-	public String updateTeamName(@RequestBody TeamNameDto teamNameDto) {
-		return teamNameService.updateTeamName(teamNameDto);
+	public String updateTeamName(@Valid @RequestBody TeamNameDto teamNameDto, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return teamNameService.updateTeamName(teamNameDto);
 	}
 	
 //	@DeleteMapping(value = "/admin/teamName/delete/{teamNameId}")

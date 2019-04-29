@@ -1,12 +1,12 @@
 package com.cygnet.Auction.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.OptimisticLockException;
 
-import org.apache.log4j.Logger;
 import org.hibernate.StaleObjectStateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,14 @@ import com.cygnet.Auction.model.TeamName;
 import com.cygnet.Auction.repository.CaptainRepository;
 import com.cygnet.Auction.repository.TeamNameRepository;
 import com.cygnet.Auction.repository.TeamRepository;
+import com.cygnet.Auction.responseDto.ResponseTeamDto;
 import com.cygnet.Auction.service.TeamService;
 import com.cygnet.Auction.util.UuidAndTimeStamp;
 
 @Service
 public class TeamServiceImpl implements TeamService{
 	
-	private final static Logger logger = Logger.getLogger(TeamServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(TeamServiceImpl.class);
 
 	@Autowired private TeamRepository teamRepository;
 	@Autowired private TeamNameRepository teamNameRepository;
@@ -49,12 +50,10 @@ public class TeamServiceImpl implements TeamService{
 		}
 	}
 
-	public List<Team> getTeam(){
-		logger.info("Error with in getTeam");
+	public List<ResponseTeamDto> getTeam(){
+		logger.info("with in getTeam");
 		try {
-			List<Team> team = new ArrayList<>();
-			teamRepository.findAll().forEach(team :: add);
-			return team;
+			return teamRepository.getAllTeamWise();
 		}catch (Exception e) {
 			logger.error("Error with in getTeam :- " + e);
 			return null;

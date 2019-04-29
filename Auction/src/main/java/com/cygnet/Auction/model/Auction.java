@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -30,6 +31,7 @@ public class Auction{
 	
 	@Id
 	@Column(name = "auctionId",columnDefinition = "nvarchar(60)")
+	@Size(min = 36, max = 36, message = "Something went please try again")
 	private String auctionId;
 	
 	@JsonManagedReference

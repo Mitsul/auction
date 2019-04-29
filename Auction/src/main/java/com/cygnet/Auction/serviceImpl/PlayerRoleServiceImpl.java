@@ -2,12 +2,12 @@ package com.cygnet.Auction.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.OptimisticLockException;
 
-import org.apache.log4j.Logger;
 import org.hibernate.StaleObjectStateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import com.cygnet.Auction.util.UuidAndTimeStamp;
 @Service
 public class PlayerRoleServiceImpl implements PlayerRoleService{
 	
-	private final static Logger logger = Logger.getLogger(PlayerRoleServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(PlayerRoleServiceImpl.class);
 
 	@Autowired PlayerRoleRepository playerRoleRepository;
 	@Autowired UuidAndTimeStamp uuidAndTimeStamp;
@@ -77,10 +77,10 @@ public class PlayerRoleServiceImpl implements PlayerRoleService{
 	}
 
 	@Override
-	public Optional<PlayerRole> getPlayerRole(PlayerRoleDto playerRoleDto) {
+	public PlayerRole getPlayerRole(String id) {
 		logger.info("With in getPlayerRole");
 		try {
-			return playerRoleRepository.findById(playerRoleDto.getPlayerRoleId());
+			return playerRoleRepository.findByPlayerRoleId(id);
 		}catch (Exception e){
 			logger.error("Error with in getPlayerRole :- " + e);
 			return null;

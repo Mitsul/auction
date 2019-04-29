@@ -13,7 +13,7 @@ public class BaseTokenController {
 
 	@Autowired private BaseTokenService baseTokenService;
 	
-	@PostMapping(value = "admin/generateBaseTokenForAllPlayers")
+	@PostMapping(value = "/admin/generateBaseTokenForAllPlayers")
 	private String generateBaseTokenForAllPlayers(@RequestBody BaseTokenDto baseTokenDto){
 		return baseTokenService.generateBaseTokenForAllPlayers(baseTokenDto);
 	}

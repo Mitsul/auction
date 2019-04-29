@@ -30,13 +30,13 @@ public class WebConfig implements WebMvcConfigurer,Filter {
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpServletRequest request = (HttpServletRequest) req;
 		System.out.println("WebConfig; "+request.getRequestURI());
-		response.setHeader("Access-Control-Allow-Origin", "/**");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
 		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Expose-Headers", "Authorization");
-		response.addHeader("Access-Control-Expose-Headers", "USERID");
+		response.addHeader("Access-Control-Expose-Headers", "EMPID");
 		response.addHeader("Access-Control-Expose-Headers", "ROLE");
 		response.addHeader("Access-Control-Expose-Headers", "responseType");
 		System.out.println("Request Method: "+request.getMethod());

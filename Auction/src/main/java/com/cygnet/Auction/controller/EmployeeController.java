@@ -1,8 +1,13 @@
 package com.cygnet.Auction.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cygnet.Auction.dto.EmployeeDto;
+import com.cygnet.Auction.model.Employee;
 import com.cygnet.Auction.responseDto.ResponseEmployeeDto;
 import com.cygnet.Auction.service.EmployeeService;
 
@@ -19,17 +25,10 @@ import com.cygnet.Auction.service.EmployeeService;
 public class EmployeeController {
 
 	@Autowired EmployeeService employeeService;
-	
-	@PostMapping(value = "/admin/addEmployee")
-	public String addEmployee(@RequestBody EmployeeDto emp) {
-		return employeeService.addEmployee(emp);
-	}
-	
+
 	@CrossOrigin(origins="/**", exposedHeaders= {"Authorization","EMPID"})
 	@PostMapping(value = "/employee/login/")
 	public ResponseEntity<String> login(@RequestBody EmployeeDto emp) {
-		System.out.println("Emp Dto" + emp.toString());
-		System.out.println("Emp Dto" + emp.toString() + " Status " + employeeService.login(emp));
 		if(employeeService.login(emp) == null) {
 			return new ResponseEntity<String>("Bad crenditials",HttpStatus.BAD_REQUEST);
 		}
@@ -38,13 +37,29 @@ public class EmployeeController {
 		}	
 	}
 	
+	@PostMapping(value = "/admin/addEmployee")
+	public String addEmployee(@Valid @RequestBody EmployeeDto emp, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return employeeService.addEmployee(emp);
+	}
+	
 	@GetMapping(value= {"/employee/{empId}", "/admin/getEmployee/{empId}"})
 	public ResponseEmployeeDto getEmpData(@PathVariable("empId") String empId) {
 		return employeeService.getEmployee(empId);
 	}
 	
-	@PutMapping(value= {"/employee/update", "/admin/update/Emloyee"})
-	public String updateEmp(@RequestBody EmployeeDto emp) {
-		return employeeService.updateEmp(emp);
+	@PutMapping(value= {"/employee/update", "/admin/update/Employee"})
+	public String updateEmp(@Valid @RequestBody EmployeeDto emp, Errors err) {
+		if(err.hasErrors())
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		else
+			return employeeService.updateEmp(emp);
+	}
+	
+	@GetMapping(value = "/admin/getAllEmployee")
+	public List<Employee> getAllEmployee() {
+		return employeeService.getAllEmployee();
 	}
 }

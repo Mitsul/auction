@@ -5,8 +5,9 @@ import java.util.List;
 
 import javax.persistence.OptimisticLockException;
 
-import org.apache.log4j.Logger;
 import org.hibernate.StaleObjectStateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import com.cygnet.Auction.util.UuidAndTimeStamp;
 @Service
 public class TeamNameServiceImpl implements TeamNameService{
 	
-	private final static Logger logger = Logger.getLogger(TeamNameServiceImpl.class);
+	static Logger logger = LoggerFactory.getLogger(TeamNameServiceImpl.class);
 
 	@Autowired TeamNameRepository teamNameRepository;
 	@Autowired UuidAndTimeStamp uuidAndTimeStamp;

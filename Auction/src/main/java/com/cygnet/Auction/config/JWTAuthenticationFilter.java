@@ -14,14 +14,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.cygnet.Auction.model.Employee;
@@ -46,12 +43,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
 		System.out.println("In attemptAuthentication");
 		try {
-			Employee creds = new ObjectMapper().readValue(req.getInputStream(), Employee.class);
-			System.out.println("Email: "+creds.getEmail() + " Password: "+creds.getPassword());
+			Employee emp = new ObjectMapper().readValue(req.getInputStream(), Employee.class);
+			System.out.println("Email: "+emp.getEmail() + " Password: "+emp.getPassword());
 			return authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
-							creds.getEmail(),
-							creds.getPassword(),
+							emp.getEmail(),
+							emp.getPassword(),
 							new ArrayList<>())
 					);
 		} catch (IOException e) {
@@ -71,22 +68,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.signWith(SignatureAlgorithm.HS512, SECRET)
 				.compact();
 
-//		JSONObject jsonToken = new JSONObject();
-//		try {
-//			UserDetails userDetails = customUserDetailService.loadUserByUsername(username);
-//			jsonToken.put("Type", TOKEN_PREFIX);
-//			jsonToken.put("Token", token);
-//			jsonToken.put("ROLE", userDetails.getAuthorities().toString().replace("ROLE_", "").trim());
-//			jsonToken.put("Expiry", new Date(System.currentTimeMillis() + EXPIRATION_TIME));
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		if(jsonToken!=null)
-//		{
-//			System.out.println(jsonToken.toString());
-//		}
 		res.addHeader("Access-Control-Expose-Headers", "Authorization");
 		res.addHeader(HEADER_STRING, TOKEN_PREFIX + token ); //+ userDetails.getAuthorities().toString().replace("ROLE_", "").trim()
 		System.out.println("Token: "+TOKEN_PREFIX + token );

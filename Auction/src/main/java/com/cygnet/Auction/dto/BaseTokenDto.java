@@ -14,4 +14,9 @@ public class BaseTokenDto {
 	private String baseTokenId;
 	private String playerId;
 	private float baseToken;
+	
+	public BaseTokenDto(float baseToken) {
+		super();
+		this.baseToken = baseToken;
+	}
 }
