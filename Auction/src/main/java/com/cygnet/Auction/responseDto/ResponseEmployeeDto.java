@@ -15,4 +15,5 @@ public class ResponseEmployeeDto {
 	private String email;
 	private String name;
 	private String gender;
+	private String roles;
 }

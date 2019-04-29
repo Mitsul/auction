@@ -21,14 +21,14 @@ public interface EmployeeRepository extends CrudRepository<Employee, String> {
 	Optional<Employee> findById(String id);
 	Employee findByEmpId(String emp_id); // for player service
 	
-	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseEmployeeDto(e.empId,e.email,e.name,e.gender) from Employee e")
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseEmployeeDto(e.empId,e.email,e.name,e.gender,e.roles) from Employee e")
 	List<ResponseEmployeeDto> findAllEmpData();
 	
-	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseEmployeeDto(e.empId,e.email,e.name,e.gender) from Employee e where empId =?1")
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseEmployeeDto(e.empId,e.email,e.name,e.gender,e.roles) from Employee e where empId =?1")
 	ResponseEmployeeDto findDetailById(String empId);
 	
 	@Transactional
 	@Modifying
-	@Query(value = "update Employee set email =?2, name =?3, gender =?4 where empId =?1")
-	void updateData(String empId, String email, String name, String gender);
+	@Query(value = "update Employee set email =?2, name =?3, gender =?4, roles =?5 where empId =?1")
+	void updateData(String empId, String email, String name, String gender, String string);
 }

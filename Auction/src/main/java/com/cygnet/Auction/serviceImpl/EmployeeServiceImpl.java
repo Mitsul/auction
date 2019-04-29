@@ -114,7 +114,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public String updateEmp(EmployeeDto emp) {
 		logger.info("With in updateEMp");
 		try {
-			employeeRepository.updateData(emp.getEmpId(),emp.getEmail(),emp.getName(),emp.getGender());
+			employeeRepository.updateData(emp.getEmpId(),emp.getEmail(),emp.getName(),emp.getGender(), emp.getRoles());
 			return "Details updated successfully.";
 		}catch (OptimisticLockException | StaleObjectStateException | HibernateOptimisticLockingFailureException e) {
 			logger.error("Error with in updateEmp :- " + e);
