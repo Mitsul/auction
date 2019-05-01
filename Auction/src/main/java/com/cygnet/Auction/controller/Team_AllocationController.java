@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cygnet.Auction.dto.TeamNameDto;
 import com.cygnet.Auction.dto.TeamwisePlayersDto;
 import com.cygnet.Auction.service.Team_AllocationService;
 
@@ -21,8 +20,8 @@ public class Team_AllocationController {
 		return team_AllocationService.generateTeam();
 	}
 	
-	@GetMapping(value = {"/admin/findByTeam", "/employee/captain/findByTeam", "/employee/findByTeam"})
-	public List<TeamwisePlayersDto> findByTeam(@RequestBody TeamNameDto teamNameDto) {
-		return team_AllocationService.findByTeam(teamNameDto);
+	@GetMapping(value = {"/admin/findByTeam/{teamId}", "/employee/captain/findByTeam/{teamId}", "/employee/findByTeam/{teamId}"})
+	public List<TeamwisePlayersDto> findByTeam(@PathVariable("teamId") String teamId) {
+		return team_AllocationService.findByTeam(teamId);
 	}
 }

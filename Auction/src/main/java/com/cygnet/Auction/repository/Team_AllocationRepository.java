@@ -1,5 +1,6 @@
 package com.cygnet.Auction.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,9 +16,12 @@ public interface Team_AllocationRepository extends JpaRepository<Team_Allocation
 
 	List<Team_Allocation> findAllByTeam(Team team);
 
-	//String query_data = "select new com.cygnet.Auction.dto.ReturnCapFromCapReviewDto(c.player_cap_ref.playerId,avg(c.rating)) From Captain_Review c group by c.player_cap_ref order by avg(c.rating) desc";
-	String query_value = "select new com.cygnet.Auction.dto.TeamwisePlayersDto(t.player.employee.name) from Team_Allocation t where team_id =?1";
+	String query_value = "select new com.cygnet.Auction.dto.TeamwisePlayersDto(t.player.employee.name, t.player.playerRole.name, t.team.teamname.Name, t.team.captain.player.employee.name) from Team_Allocation t where t.team.teamId =?1";
 	@Query(value = query_value)
 	List<TeamwisePlayersDto> findByTeamName(String team_id);
+	
+	String query = "select new com.cygnet.Auction.dto.TeamwisePlayersDto(t.player.employee.name, t.player.playerRole.name, t.team.teamname.Name, t.team.captain.player.employee.name) from Team_Allocation t where t.team.teamId =?1 and teamAllocationDatetime between ?2 and ?3";
+	@Query(value = query)
+	List<TeamwisePlayersDto> getPlayersByTeamReport(String id, Date startDate, Date endDate);
 
 }

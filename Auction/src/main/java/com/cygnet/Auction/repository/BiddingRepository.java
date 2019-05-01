@@ -1,5 +1,6 @@
 package com.cygnet.Auction.repository;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -27,5 +28,8 @@ public interface BiddingRepository extends JpaRepository<Bidding, String> {
 
 	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayersFromCaptainDto(b.captain.player.employee.name,b.player.employee.name,b.player.playerRole.name) from Bidding b where b.captain.player.employee.empId =?1")
 	List<ResponsePlayersFromCaptainDto> getPlayersFromCaptain(String empId);
+
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayersFromCaptainDto(b.captain.player.employee.name,b.player.employee.name,b.player.playerRole.name) from Bidding b where b.captain.player.employee.empId =?1 and biddingDatetime between ?2 and ?3")
+	List<ResponsePlayersFromCaptainDto> getPlayersFromCaptainTimestamp(String empId, Date startDate, Date endDate);
 
 }

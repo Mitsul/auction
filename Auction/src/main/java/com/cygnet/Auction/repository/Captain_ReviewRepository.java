@@ -29,6 +29,9 @@ public interface Captain_ReviewRepository extends JpaRepository<Captain_Review, 
 	List<ReturnCapFromCapReviewDto> findAllCaptain();
 
 	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseGetCaptainReview(c.player.playerId ,c.capRevId, c.player.employee.name, c.player_cap_ref.employee.name, c.rating) from Captain_Review c  where c.player.employee = ?1")
-	ResponseGetCaptainReview findByEmployee(Employee emp); 
+	ResponseGetCaptainReview findByEmployee(Employee emp);
 
+	String query_data_report = "select new com.cygnet.Auction.dto.ReturnCapFromCapReviewDto(c.player_cap_ref.employee.empId, c.player_cap_ref.playerId, c.player_cap_ref.employee.name,avg(c.rating)) From Captain_Review c where c.captainReviewDatetime between ?1 and ?2 group by c.player_cap_ref order by avg(c.rating) desc";
+	@Query(value = query_data_report)
+	List<ReturnCapFromCapReviewDto> findAllCaptainForReport(Date startDate, Date endDate);
 }

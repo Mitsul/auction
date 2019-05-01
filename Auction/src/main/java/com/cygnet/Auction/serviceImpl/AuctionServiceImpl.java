@@ -1,5 +1,14 @@
 package com.cygnet.Auction.serviceImpl;
 
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +18,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cygnet.Auction.dto.AuctionDto;
+import com.cygnet.Auction.dto.ReportDto;
 import com.cygnet.Auction.model.BaseToken;
 import com.cygnet.Auction.model.Bidding;
 import com.cygnet.Auction.model.Captain;
 import com.cygnet.Auction.model.Token;
+import com.cygnet.Auction.repository.AuctionRepository;
 import com.cygnet.Auction.repository.BaseTokenRepository;
 import com.cygnet.Auction.repository.BiddingRepository;
 import com.cygnet.Auction.repository.CaptainRepository;
 import com.cygnet.Auction.repository.EmployeeRepository;
 import com.cygnet.Auction.repository.PlayerRepository;
 import com.cygnet.Auction.repository.TokenRepository;
+import com.cygnet.Auction.responseDto.ResponseAllBidsByCaptains;
 import com.cygnet.Auction.service.AuctionService;
 
 @Service
@@ -35,6 +47,7 @@ public class AuctionServiceImpl implements AuctionService{
 	@Autowired  private CaptainRepository captainRepository;
 	@Autowired  private TransactionServiceImpl transactionServiceImpl;
 	@Autowired  private EmployeeRepository employeeRepository; 
+	@Autowired private AuctionRepository auctionRepository;
 
 	@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED, readOnly=false, timeout = 300, rollbackFor = Exception.class)
 	public String playerBid(AuctionDto auctionDto) {
@@ -68,6 +81,94 @@ public class AuctionServiceImpl implements AuctionService{
 		}
 		else {
 			return "Insufficient Amount for bidding...";
+		}
+	}
+
+	@Override
+	public List<ResponseAllBidsByCaptains> getAllBidsByCaptain(ReportDto reportDto) {
+		logger.info("With in getAllBidsByCaptain");
+		try {
+			
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+			
+			Calendar calStart = Calendar.getInstance();
+			calStart.setTime(reportDto.getStartDate());
+			calStart.set(Calendar.HOUR, 0);
+			calStart.set(Calendar.MINUTE, 0);
+			calStart.set(Calendar.SECOND, 0);
+			calStart.set(Calendar.MILLISECOND, 0);
+			Date modifiedStartDate = calStart.getTime();
+			String start = formatter.format(modifiedStartDate);
+			Date startDate = reportDto.getStartDate();
+
+			Calendar calEnd = Calendar.getInstance();
+			calEnd.setTime(reportDto.getEndDate());
+			calEnd.set(Calendar.HOUR, 23);
+			calEnd.set(Calendar.MINUTE, 59);
+			calEnd.set(Calendar.SECOND, 59);
+			calEnd.set(Calendar.MILLISECOND, 0);
+			Date modifiedEndDate = calEnd.getTime();
+			String end = formatter.format(modifiedEndDate);
+			Date endDate = reportDto.getEndDate();
+			try {
+				startDate = format.parse(start);
+				endDate = format.parse(end);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			reportDto.setStartDate(startDate);
+			reportDto.setEndDate(endDate);
+			
+			return auctionRepository.getAllBidsByCaptain(reportDto.getStartDate(), reportDto.getEndDate());
+			
+		} catch (Exception e) {
+			logger.info("Exception in getAllBidsByCaptain : " + e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<ResponseAllBidsByCaptains> getBidsByCaptain(ReportDto reportDto) {
+		logger.info("With in getBidsByCaptain");
+		try {
+			
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+			
+			Calendar calStart = Calendar.getInstance();
+			calStart.setTime(reportDto.getStartDate());
+			calStart.set(Calendar.HOUR, 0);
+			calStart.set(Calendar.MINUTE, 0);
+			calStart.set(Calendar.SECOND, 0);
+			calStart.set(Calendar.MILLISECOND, 0);
+			Date modifiedStartDate = calStart.getTime();
+			String start = formatter.format(modifiedStartDate);
+			Date startDate = reportDto.getStartDate();
+
+			Calendar calEnd = Calendar.getInstance();
+			calEnd.setTime(reportDto.getEndDate());
+			calEnd.set(Calendar.HOUR, 23);
+			calEnd.set(Calendar.MINUTE, 59);
+			calEnd.set(Calendar.SECOND, 59);
+			calEnd.set(Calendar.MILLISECOND, 0);
+			Date modifiedEndDate = calEnd.getTime();
+			String end = formatter.format(modifiedEndDate);
+			Date endDate = reportDto.getEndDate();
+			try {
+				startDate = format.parse(start);
+				endDate = format.parse(end);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			reportDto.setStartDate(startDate);
+			reportDto.setEndDate(endDate);
+			
+			return auctionRepository.getBidsByCaptain(reportDto.getEmpId(), reportDto.getStartDate(), reportDto.getEndDate());
+			
+		} catch (Exception e) {
+			logger.info("Exception in getBidsByCaptain : " + e);
+			return null;
 		}
 	}
 		

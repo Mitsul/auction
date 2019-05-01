@@ -10,5 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamwisePlayersDto {
-	String name;
+	
+	private String name;
+	private String role;
+	private String teamName;
+	private String capName;
 }

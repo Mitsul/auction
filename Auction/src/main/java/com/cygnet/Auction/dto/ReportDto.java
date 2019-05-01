@@ -1,4 +1,6 @@
-package com.cygnet.Auction.responseDto;
+package com.cygnet.Auction.dto;
+
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,11 +11,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseEmployeeDto {
-	
+public class ReportDto {
+
+	private String id;
 	private String empId;
-	private String email;
-	private String name;
-	private String gender;
-	private String role;
+	private Date startDate;
+	private Date endDate;
 }

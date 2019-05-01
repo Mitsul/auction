@@ -19,5 +19,4 @@ public interface CaptainRepository extends JpaRepository<Captain, String> {
 	List<ResponseCaptainList> getAllCaptains();
 
 	Captain findByPlayer(Player player);
-
 }

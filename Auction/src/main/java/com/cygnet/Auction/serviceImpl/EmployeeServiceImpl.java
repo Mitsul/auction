@@ -40,11 +40,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Autowired private AuthenticationManager authenticationManager;
 	@Autowired private HttpServletResponse response;
 	
+	 @Bean
+	 public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		 return new BCryptPasswordEncoder();
+	 }
+	
 	public String addEmployee(EmployeeDto emp) {
 		logger.info("With in addEmployee");
 		try {
 			if(employeeRepository.findByEmail(emp.getEmail()) == null ) {
 				emp.setEmpId(uuidAndTimeStamp.getUuid());
+				emp.setPassword(bCryptPasswordEncoder().encode(emp.getPassword()));
 				Employee e1 = new Employee(emp.getEmpId(), emp.getEmail(),emp.getName(), emp.getGender(),emp.getPassword(),emp.getRoles());
 				employeeRepository.save(e1);
 				return "Player created successfully.";
@@ -114,7 +120,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public String updateEmp(EmployeeDto emp) {
 		logger.info("With in updateEMp");
 		try {
-			employeeRepository.updateData(emp.getEmpId(),emp.getEmail(),emp.getName(),emp.getGender(), emp.getRoles());
+			employeeRepository.updateData(emp.getEmpId(),emp.getEmail(),emp.getName(),emp.getGender(),emp.getRoles());
 			return "Details updated successfully.";
 		}catch (OptimisticLockException | StaleObjectStateException | HibernateOptimisticLockingFailureException e) {
 			logger.error("Error with in updateEmp :- " + e);

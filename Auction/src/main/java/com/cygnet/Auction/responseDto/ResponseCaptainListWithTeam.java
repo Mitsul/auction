@@ -9,11 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseEmployeeDto {
-	
+public class ResponseCaptainListWithTeam {
+
 	private String empId;
-	private String email;
+	private String playerId;
+	private String capId;
 	private String name;
-	private String gender;
-	private String role;
+	private String teamId;
+	private String teamName;
 }
