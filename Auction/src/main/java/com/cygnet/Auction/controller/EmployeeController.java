@@ -37,7 +37,7 @@ public class EmployeeController {
 		}	
 	}
 	
-	@PostMapping(value = "/admin/addEmployee")
+	@PostMapping(value = "/admin/addEmployee", produces = "text/plain")
 	public String addEmployee(@Valid @RequestBody EmployeeDto emp, Errors err) {
 		if(err.hasErrors())
 			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
@@ -45,12 +45,12 @@ public class EmployeeController {
 			return employeeService.addEmployee(emp);
 	}
 	
-	@GetMapping(value= {"/employee/{empId}", "/admin/getEmployee/{empId}"})
+	@GetMapping(value= {"/admin/{empId}" ,"/employee/{empId}", "/admin/getEmployee/{empId}"})
 	public ResponseEmployeeDto getEmpData(@PathVariable("empId") String empId) {
 		return employeeService.getEmployee(empId);
 	}
 	
-	@PutMapping(value= {"/employee/update", "/admin/update/Employee"})
+	@PutMapping(value= {"admin/update" ,"/employee/update", "/admin/update/Employee"})
 	public String updateEmp(@Valid @RequestBody EmployeeDto emp, Errors err) {
 		if(err.hasErrors())
 			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();

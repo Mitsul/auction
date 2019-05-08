@@ -31,12 +31,12 @@ public class AuctionController {
 	@Autowired AuctionService auctionService;
 	@Autowired PlayerServiceImpl playerService;
 	
-	@GetMapping(value = "/employee/captain/getPlayers")
+	@GetMapping(value = {"/employee/getPlayers","/admin/getPlayers"})
 	public List<ResponsePlayersForBid> getPlayersForBid() {
 		 return playerService.getPlayersForBid(0);
 	}
 	
-	@PostMapping(value = "/employee/captain/bid")
+	@PostMapping(value = {"/employee/captain/bid","/admin/captain/bid"})
 	public String playerBid(@Valid @RequestBody AuctionDto auctionDto, Errors err) {
 		logger.info("With in playerBid");
 		if(err.hasErrors())

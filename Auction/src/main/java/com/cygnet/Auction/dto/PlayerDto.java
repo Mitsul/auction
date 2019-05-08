@@ -26,17 +26,24 @@ public class PlayerDto {
 	private Date joinedOn;
 	private Date updatedOn;
 	
-	@Size(min = 6, max = 25, message = "Something went with player Role, please try again")
+	@Size(min = 36, max = 36, message = "Something went with player Role, please try again")
 	private String playerRole;
 
 	public PlayerDto(@Size(min = 36, max = 36, message = "Something went please try again") String empId,
 			int prefCaptain, int isActive,
-			@Size(min = 6, max = 25, message = "Something went with player Role, please try again") String playerRole) {
+			@Size(min = 6, max = 36, message = "Something went with player Role, please try again") String playerRole) {
 		super();
 		this.empId = empId;
 		this.prefCaptain = prefCaptain;
 		this.isActive = isActive;
 		this.playerRole = playerRole;
 	}
+
+	@Override
+	public String toString() {
+		return "PlayerDto [playerId=" + playerId + ", empId=" + empId + ", prefCaptain=" + prefCaptain + ", isActive="
+				+ isActive + ", joinedOn=" + joinedOn + ", updatedOn=" + updatedOn + ", playerRole=" + playerRole + "]";
+	}
+	
 	
 }

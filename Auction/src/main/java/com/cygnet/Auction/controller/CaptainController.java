@@ -29,7 +29,7 @@ public class CaptainController {
 		return captainService.addCaptains(size);
 	}
 	
-	@GetMapping(value = {"/admin/playersFromCaptain/{empId}", "/employee/playersFromCaptain/{empId}", "/captain/playersFromCaptain/{empId}"})
+	@GetMapping(value = {"/admin/playersFromCaptain/{empId}", "/employee/playersFromCaptain/{empId}"})
 	public List<ResponsePlayersFromCaptainDto> getPlayersFromCaptain(@PathVariable("empId") String empId){
 		return captainService.getPlayersFromCaptain(empId);
 		
@@ -40,7 +40,7 @@ public class CaptainController {
 		return captainService.getCaptainList();
 	}
 	
-	@GetMapping(value = "/employee/checkEmpAsCap/{empId}")
+	@GetMapping(value = {"/employee/checkEmpAsCap/{empId}","/admin/checkEmpAsCap/{empId}"})
 	public String checkEmpAsCap(@PathVariable("empId") String empId) {
 		return captainService.checkEmpAsCap(empId);
 	}

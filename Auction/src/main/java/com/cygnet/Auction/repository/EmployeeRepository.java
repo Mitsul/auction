@@ -29,6 +29,6 @@ public interface EmployeeRepository extends CrudRepository<Employee, String> {
 	
 	@Transactional
 	@Modifying
-	@Query(value = "update Employee set email =?2, name =?3, gender =?4, roles =?5 where empId =?1")
-	void updateData(String empId, String email, String name, String gender, String string);
+	@Query(value = "update Employee set email =?2, name =?3, gender =?4 where empId =?1")
+	void updateData(String empId, String email, String name, String gender);
 }

@@ -36,7 +36,7 @@ public class Player_StatController {
 		return player_StatService.adminGetAllEmp();
 	}
 	
-	@GetMapping(value= {"admin/playerStat/{empId}","/employee/player/playerStat/{empId}"})
+	@GetMapping(value= {"admin/player/playerStat/{empId}","/employee/player/playerStat/{empId}"})
 	public ResponsePlayer_StatDto adminGetPlayerStat(@PathVariable("empId") String empId) {
 		return player_StatService.adminGetPlayerStat(empId);
 	}
@@ -48,7 +48,7 @@ public class Player_StatController {
 		return player_StatService.updatePlayerStat(player_StatDto);
 	}
 	
-	@GetMapping(value= {"/admin/playerStat/getAll","/employee/player/playerStat/getAll"})
+	@GetMapping(value= {"/admin/player/playerStat/getAll","/employee/player/playerStat/getAll"})
 	public List<ResponsePlayer_StatDto> adminPlayerStatGetAll() {
 		return player_StatService.adminPlayerStatGetAll();
 	}

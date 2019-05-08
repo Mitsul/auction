@@ -45,8 +45,7 @@ public class TeamNameServiceImpl implements TeamNameService{
 	public String updateTeamName(TeamNameDto teamNameDto) {
 		logger.info("With in updateTeamName");
 		try {
-			TeamName teamName = new TeamName(teamNameDto.getTeamNameId(),teamNameDto.getName());
-			teamNameRepository.save(teamName);
+			teamNameRepository.updateTeamName(teamNameDto.getTeamNameId(),teamNameDto.getName());
 			return "Team updated successfully.";
 		}catch (OptimisticLockException | StaleObjectStateException | HibernateOptimisticLockingFailureException e) {
 			logger.error("Error with in updateTeamName :- " + e);

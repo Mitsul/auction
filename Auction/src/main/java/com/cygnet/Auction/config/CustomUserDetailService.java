@@ -1,5 +1,7 @@
 package com.cygnet.Auction.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -9,10 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.cygnet.Auction.model.Employee;
-import com.cygnet.Auction.model.User;
 import com.cygnet.Auction.repository.EmployeeRepository;
-
-import java.util.List;
 
 @Component
 public class CustomUserDetailService implements UserDetailsService {
@@ -48,18 +47,18 @@ public class CustomUserDetailService implements UserDetailsService {
 		}
 	}
 	
-	@Override
-	public boolean equals(Object objUser) {
-		System.out.println((objUser instanceof User));
-		if(objUser == null) return false;
-		else if (!(objUser instanceof User)) return false;
-		else return (objUser.hashCode() == hashCode());
-	}
+//	@Override
+//	public boolean equals(Object objUser) {
+//		System.out.println((objUser instanceof User));
+//		if(objUser == null) return false;
+//		else if (!(objUser instanceof User)) return false;
+//		else return (objUser.hashCode() == hashCode());
+//	}
 	
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
+//	@Override
+//	public int hashCode() {
+//		return super.hashCode();
+//	}
 	
 
 }
