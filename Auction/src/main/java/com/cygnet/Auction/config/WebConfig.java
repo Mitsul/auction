@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Config class for WebConfig
+ */
+
 package com.cygnet.Auction.config;
 
 import javax.servlet.Filter;
@@ -10,12 +18,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer,Filter {
 
+	@Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+    }
+	
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**").allowedOrigins("/**")

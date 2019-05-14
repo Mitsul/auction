@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Config class for SecurityConfig
+ */
+
 package com.cygnet.Auction.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +65,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 		web
 		.ignoring()
 		.antMatchers("/employee/login/")
+		.antMatchers("/actuator/**")
 		.antMatchers("http://192.168.100.36:4200/**")
 		.antMatchers(HttpMethod.OPTIONS,"/**");
+		
+		 web.ignoring()
+		 .mvcMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**",
+					"/swagger-ui.html/**", "/swagger-resources/**");
 	}
 	
 	@Override
@@ -66,16 +79,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 		http
 		.csrf().disable()
 		.authorizeRequests()
-//		.antMatchers("/**").permitAll()
+		.antMatchers("/**").permitAll()
 		.antMatchers(HttpMethod.POST,"/employee/login/").permitAll()
 		.antMatchers("http://192.168.100.36:8088/**").permitAll()
 		.antMatchers("http://localhost:4200/login").permitAll()
 		.antMatchers("/localhost:4200/**").permitAll()
 		.antMatchers(HttpMethod.POST,"/employee/login/").permitAll()
 		.antMatchers(HttpMethod.OPTIONS,"/employee/login/").permitAll()
-
-		.antMatchers(HttpMethod.GET,"/actuator/**").permitAll() 
-		.antMatchers(HttpMethod.POST,"/actuator/**").permitAll()
+		
+		.antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**",
+				"/swagger-ui.html/**", "/swagger-resources/**").permitAll()
 		
 		.antMatchers(HttpMethod.POST,"/admin/**").hasRole("ADMIN") 
 		.antMatchers(HttpMethod.PUT,"/admin/**").hasRole("ADMIN")
@@ -97,6 +110,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 		.addFilter(new JWTAuthenticationFilter(authenticationManager(), customUserDetailService))
 		.addFilter(new JWTAuthorizationFilter(authenticationManager(), customUserDetailService));
 		//.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
+		
+		http.headers().frameOptions().disable();
 	}
 
 }

@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Repository class for TeamName
+ */
+
 package com.cygnet.Auction.repository;
 
 import javax.transaction.Transactional;

@@ -57,10 +57,9 @@ public class TimingServiceImpl implements TimingService{
 	public String updateTiming(TimingDto timingDto) {
 		logger.info("With in updateTiming");
 		try {
-			Timing timing = new Timing(timingDto.getTimeId(),timingDto.getParticipateStartDate(),timingDto.getParticipateEndDate(),
+			timingRepository.updateTiming(timingDto.getTimeId(),timingDto.getParticipateStartDate(),timingDto.getParticipateEndDate(),
 					timingDto.getReviewStartDate(),timingDto.getReviewEndDate(),timingDto.getCaptainListDate(),
 					timingDto.getAuctionStartDate(),timingDto.getAuctionEndDate());
-			timingRepository.save(timing);
 			return "Timing's updated successfully.";
 		}catch (OptimisticLockException | StaleObjectStateException | HibernateOptimisticLockingFailureException e) {
 			logger.error("Error with in updateTiming :- " + e);

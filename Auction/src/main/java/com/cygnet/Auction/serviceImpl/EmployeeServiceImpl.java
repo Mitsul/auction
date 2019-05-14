@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the CaptainService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.util.ArrayList;
@@ -45,6 +53,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 		 return new BCryptPasswordEncoder();
 	 }
 	
+	 /**
+		 * <b> Add Employee : </b> This function is for adding employees
+		 * @param emp This is the parameter for the addEmployee function
+		 * @return String This is the return of the function
+		 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+		 * @see OptimisticLockException
+		 * @see StaleObjectStateException
+		 * @see HibernateOptimisticLockingFailureException
+		 * @see e
+		 */
 	public String addEmployee(EmployeeDto emp) {
 		logger.info("With in addEmployee");
 		try {
@@ -66,6 +84,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 	}
 
+	/**
+	 * <b> Login : </b> This function is for the login of the employees
+	 * @param empDto This is the parameter for the login function
+	 * @return String This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public String login(EmployeeDto empDto) {
 		logger.info("With on login");
 		try {
@@ -99,6 +124,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}		
 	}
 
+	/**
+	 * <b> Get Employee : </b> This function is returns the employee based on the empId
+	 * @param empId This is the parameter for the getEmployee function
+	 * @return ResponseEmployeeDto This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public ResponseEmployeeDto getEmployee(String empId) {
 		logger.info("With in getemployee");
 		try {
@@ -109,7 +141,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 	}
 	
-	
+	/**
+	 * <b> Password Encoder : </b> This function is for encoding the password
+	 * @return PasswordEncoder This is the return of the function
+	 */
 	@Bean
 	@Primary
 	public PasswordEncoder loginpasswordEncoder() {
@@ -117,6 +152,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 	
 
+	/**
+	 * <b> Update Employee : </b> This function is for updating the employee
+	 * @param emp This is the parameter for the updateEmp function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String updateEmp(EmployeeDto emp) {
 		logger.info("With in updateEMp");
 		try {
@@ -131,6 +176,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 	}
 
+	/**
+	 * <b> Find by Email : </b> This function is for finding the employee based on the email
+	 * @param email This is the parameter for the findByEmail function
+	 * @return Employee This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	@Override
 	public Employee findByEmail(String email) {
 		logger.info("With in findByEmail");
@@ -142,6 +194,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 	}
 
+	/**
+	 * <b> List of Employees : </b> This function returns the list of the function
+	 * @return List<Employee> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	@Override
 	public List<Employee> getAllEmployee() {
 		logger.info("With in getAllEmployee");

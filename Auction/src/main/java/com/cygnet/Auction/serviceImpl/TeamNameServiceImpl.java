@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the TeamNameService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.util.ArrayList;
@@ -26,6 +34,17 @@ public class TeamNameServiceImpl implements TeamNameService{
 	@Autowired TeamNameRepository teamNameRepository;
 	@Autowired UuidAndTimeStamp uuidAndTimeStamp;
 
+	
+	/**
+	 * <b> Add Team Name : </b> This function is for adding the team
+	 * @param teamNameDto This is the parameter for the addTeamName function
+	 * @return String This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String addTeamName(TeamNameDto teamNameDto) {
 		logger.info("With in addTeamName");
 		try {
@@ -42,6 +61,16 @@ public class TeamNameServiceImpl implements TeamNameService{
 		}
 	}
 
+	/**
+	 * <b> Update Team Name : </b> This function is for updating the team name
+	 * @param teamNameDto This is the parameter for the updateTeamName function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String updateTeamName(TeamNameDto teamNameDto) {
 		logger.info("With in updateTeamName");
 		try {
@@ -56,17 +85,12 @@ public class TeamNameServiceImpl implements TeamNameService{
 		}
 	}
 
-//	public String deleteTeamName(String teamNameId) {
-//		try {
-//			teamNameRepository.deleteByTeamNameId(teamNameId);
-//			return "Team deleted successfully.";
-//		}catch (OptimisticLockException | StaleObjectStateException | HibernateOptimisticLockingFailureException e) {
-//			return "Please try again, due to exception of locking :-" + e;
-//		}catch (Exception e){
-//			return "Please try again, due to exception :-" + e;
-//		}
-//	}
-
+	/**
+	 * <b> Get all Team Name : </b> This function returns the list of the Team Name
+	 * @return List<TeamName> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<TeamName> getAllTeamName() {
 		logger.info("With in getAllTeamName");
 		try {

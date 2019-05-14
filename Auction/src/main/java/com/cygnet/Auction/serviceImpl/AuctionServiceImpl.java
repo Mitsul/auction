@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the AuctionService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.text.DateFormat;
@@ -35,7 +43,6 @@ import com.cygnet.Auction.service.AuctionService;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-//@Transactional(propagation = Propagation.SUPPORTS, readOnly=true)
 public class AuctionServiceImpl implements AuctionService{
 	
 	static Logger logger = LoggerFactory.getLogger(AuctionServiceImpl.class);
@@ -49,6 +56,12 @@ public class AuctionServiceImpl implements AuctionService{
 	@Autowired  private EmployeeRepository employeeRepository; 
 	@Autowired private AuctionRepository auctionRepository;
 
+	
+	/**
+	 * <b> Player's Bid : </b> This function is for bidding of the player
+	 * @param auctionDto This is the parameter for the playerBid function
+	 * @return String This is the return of the function
+	 */
 	@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED, readOnly=false, timeout = 300, rollbackFor = Exception.class)
 	public String playerBid(AuctionDto auctionDto) {
 		
@@ -84,6 +97,13 @@ public class AuctionServiceImpl implements AuctionService{
 		}
 	}
 
+	/**
+	 * <b> getAllBidsByCaptain : </b> This function returns the every bid placed by every captain in the specified tournament
+	 * @param reportDto This is the parameter for the getAllBidsByCaptain function
+	 * @return List<ResponseAllBidsByCaptains> This is the return of the function
+	 * @exception e This is the exception for the function
+	 * @see e
+	 */
 	@Override
 	public List<ResponseAllBidsByCaptains> getAllBidsByCaptain(ReportDto reportDto) {
 		logger.info("With in getAllBidsByCaptain");
@@ -128,6 +148,13 @@ public class AuctionServiceImpl implements AuctionService{
 		}
 	}
 
+	/**
+	 * <b> getBidsByCaptain : </b> This function returns the every bid placed by particular captain in the specified tournament
+	 * @param reportDto This is the parameter for the getBidsByCaptain function
+	 * @return List<ResponseAllBidsByCaptains> This is the return of the function
+	 * @exception e This is the exception for the function
+	 * @see e
+	 */
 	@Override
 	public List<ResponseAllBidsByCaptains> getBidsByCaptain(ReportDto reportDto) {
 		logger.info("With in getBidsByCaptain");

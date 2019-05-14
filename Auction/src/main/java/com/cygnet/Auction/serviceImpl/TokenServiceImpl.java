@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the TokenService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.util.List;
@@ -28,6 +36,12 @@ public class TokenServiceImpl implements TokenService{
 	@Autowired private CaptainRepository captainRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
 	
+	/**
+	 * <b> Get Tokens : </b> This function is for getting the allocated tokens and the remaining tokens
+	 * @return List<ResponseCaptainTokenDto> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<ResponseCaptainTokenDto> getTokens() {
 		logger.info("With in getTokens");
 		try {
@@ -39,6 +53,16 @@ public class TokenServiceImpl implements TokenService{
 		
 	}
 
+	/**
+	 * <b> Generate Tokens : </b> This function is for allocating the tokens to the captains
+	 * @param tokens This is the parameter for the generateTokens function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String generateTokens(float tokens) {
 		logger.info("With in generateTokens");
 		try {

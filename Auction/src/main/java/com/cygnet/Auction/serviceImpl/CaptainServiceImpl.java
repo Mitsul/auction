@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the CaptainService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.text.DateFormat;
@@ -30,6 +38,7 @@ import com.cygnet.Auction.repository.EmployeeRepository;
 import com.cygnet.Auction.repository.PlayerRepository;
 import com.cygnet.Auction.responseDto.ResponseCaptainList;
 import com.cygnet.Auction.responseDto.ResponsePlayersFromCaptainDto;
+import com.cygnet.Auction.responseDto.ResponseString;
 import com.cygnet.Auction.service.CaptainService;
 import com.cygnet.Auction.util.UuidAndTimeStamp;
 
@@ -45,6 +54,13 @@ public class CaptainServiceImpl implements CaptainService{
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
 	
+	
+	/**
+	 * <b> Select Captains : </b> This function return the list of the captains who opted as a captain with the average review
+	 * @return List<ReturnCapFromCapReviewDto> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<ReturnCapFromCapReviewDto> selectCaptains() {
 		logger.info("With in selectCaptains");
 		try {
@@ -55,6 +71,16 @@ public class CaptainServiceImpl implements CaptainService{
 		}
 	}
 	
+	/**
+	 * <b> Add captains : </b> This function is used for generating the final list of the captains based on the review's
+	 * @param size This is the parameter for the addCaptains function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String addCaptains(int size) {
 		logger.info("With in addCaptains");
 		try {
@@ -78,7 +104,13 @@ public class CaptainServiceImpl implements CaptainService{
 		}
 	}
 
-	@Override
+	/**
+	 * <b> Get players from captain : </b> This function returns the list of the players on the basis of the captain
+	 * @param empId This is the parameter for the getPlayersFromCaptain function
+	 * @return List<ResponsePlayersFromCaptainDto> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<ResponsePlayersFromCaptainDto> getPlayersFromCaptain(String empId) {
 		logger.info("With in getPlayersFromCaptain");	
 		try {
@@ -89,10 +121,19 @@ public class CaptainServiceImpl implements CaptainService{
 		}
 	}
 
+	/**
+	 * <b> Get Captains List : </b> This function returns the final list of the captains
+	 * @return List<ResponseCaptainList> This is the return of the function
+	 */
 	public List<ResponseCaptainList> getCaptainList() {
 		return captainRepository.getAllCaptains();
 	}
 
+	/**
+	 * <b> Check employee as captain : </b> This function checks whether the player is a captain or not
+	 * @param empId This is the parameter for the addAddress function
+	 * @return String This is the return of the function
+	 */
 	public String checkEmpAsCap(String empId) {
 		Player player = playerRepository.findByEmployee(employeeRepository.findByEmpId(empId));
 		if(player != null) {
@@ -107,7 +148,13 @@ public class CaptainServiceImpl implements CaptainService{
 		}
 	}
 
-	@Override
+	/**
+	 * <b> Select Captains time wise : </b> This function returns the list of the captains time wise
+	 * @param reportDto This is the parameter for the selectCaptainsTimeStamp function
+	 * @return List<ReturnCapFromCapReviewDto> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<ReturnCapFromCapReviewDto> selectCaptainsTimeStamp(ReportDto reportDto) {
 		logger.info("With in selectCaptainsForReport");
 		try {
@@ -150,7 +197,13 @@ public class CaptainServiceImpl implements CaptainService{
 		}
 	}
 
-	@Override
+	/**
+	 * <b> Select players from captains time wise : </b> This function returns the list of players from captain time wise
+	 * @param reportDto This is the parameter for the getPlayersFromCaptainTimestamp function
+	 * @return List<ResponsePlayersFromCaptainDto> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<ResponsePlayersFromCaptainDto> getPlayersFromCaptainTimestamp(ReportDto reportDto) {
 		logger.info("With in getPlayersFromCaptainTimestamp");
 		try {
@@ -190,6 +243,21 @@ public class CaptainServiceImpl implements CaptainService{
 		}catch (Exception e) {
 			logger.error("Error with in getPlayersFromCaptainTimestamp :- " + e);
 			return null;
+		}
+	}
+
+	/**
+	 * <b> Select employee from capId : </b> This function returns employee from capId
+	 * @param capId
+	 * @return ResponseString
+	 */
+	public ResponseString getEmployeeByCapId(String capId) {
+		logger.info("With in findEmployeeByCapId");
+		try {
+			return captainRepository.findEmployeeByCapId(capId);
+		} catch (Exception e) {
+			logger.error("Error with in findEmployeeByCapId :- " + e);
+			return new ResponseString("Error with in findEmployeeByCapId :- " + e);
 		}
 	}
 }

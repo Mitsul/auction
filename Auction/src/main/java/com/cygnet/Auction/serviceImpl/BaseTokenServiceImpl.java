@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the BaseTokenService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.util.List;
@@ -28,6 +36,17 @@ public class BaseTokenServiceImpl implements BaseTokenService{
 	@Autowired private PlayerRepository playerRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
 	
+	
+	/**
+	 * <b> Generate Base Token : </b> This function is for generating the base token for the players
+	 * @param baseTokenDto This is the parameter for the generateBaseTokenForAllPlayers function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String generateBaseTokenForAllPlayers(BaseTokenDto baseTokenDto) {
 		logger.info("With in generateTokenForAllPlayers");
 		try {

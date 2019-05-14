@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the TeamService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.text.DateFormat;
@@ -40,6 +48,15 @@ public class TeamServiceImpl implements TeamService{
 	@Autowired private CaptainRepository captainRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
 	
+	/**
+	 * <b> Set Team : </b> This function is for allocating the team to the captains
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String setTeam() {
 		logger.info("With in setTeam");
 		try {
@@ -59,6 +76,12 @@ public class TeamServiceImpl implements TeamService{
 		}
 	}
 
+	/**
+	 * <b> Get team : </b> This function is returns the list of the players team wise
+	 * @return List<ResponseTeamDto> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<ResponseTeamDto> getTeam(){
 		logger.info("with in getTeam");
 		try {
@@ -69,6 +92,13 @@ public class TeamServiceImpl implements TeamService{
 		}
 	}
 
+	/**
+	 * <b> Get captain list tournament wise : </b> This function returns the list of the captain tournament wise
+	 * @param reportDto This is the parameter for the getCaptainListTimeStamp function
+	 * @return List<ResponseCaptainListWithTeam> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	@Override
 	public List<ResponseCaptainListWithTeam> getCaptainListTimeStamp(ReportDto reportDto) {
 		

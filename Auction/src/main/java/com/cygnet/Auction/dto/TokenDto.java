@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Dto class for Token
+ */
+
 package com.cygnet.Auction.dto;
 
 import lombok.AllArgsConstructor;

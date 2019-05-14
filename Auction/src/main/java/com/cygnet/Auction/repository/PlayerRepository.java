@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Repository class for Player
+ */
+
 package com.cygnet.Auction.repository;
 
 import java.util.Date;
@@ -21,7 +29,7 @@ import com.cygnet.Auction.responseDto.ResponsePlayersForBid;
 public interface PlayerRepository extends JpaRepository<Player, String> {
 
 
-	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayerDto(p.playerId, p.employee.empId, p.employee.email, p.employee.name, p.employee.gender, p.isActive, p.prefCaptain, p.playerRole.name) from Player p where p.employee = ?1")
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayerDto(p.playerId, p.employee.empId, p.employee.email, p.employee.name, p.employee.gender, p.isActive, p.prefCaptain, p.playerRole.name, p.playerRole.playerRoleId) from Player p where p.employee = ?1")
 	ResponsePlayerDto findByEmployeeforPlayer(Employee emp);
 
 	@Modifying

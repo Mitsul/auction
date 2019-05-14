@@ -1,8 +1,20 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is transaction of the auctionServiceImpl class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
+import javax.persistence.OptimisticLockException;
+
+import org.hibernate.StaleObjectStateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +46,17 @@ public class TransactionServiceImpl {
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired  private UuidAndTimeStamp UuidAndTimeStamp;
 	
+	/**
+	 * <b> Current Players Bid : </b> This function is for the bid of the current player who's bid is already placed by the other captain
+	 * @param bidding This is the parameter for the currentPlayersBid function
+	 * @param auctionDto This is the parameter for the currentPlayersBid function
+	 * @return void This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void currentPlayersBid(Bidding bidding, AuctionDto auctionDto) {
 		
@@ -64,6 +87,16 @@ public class TransactionServiceImpl {
 		}
 	}
 
+	/**
+	 * <b> New Players Bid : </b> This function is for the bid of the new player who's bid is not placed before by the another captain
+	 * @param auctionDto This is the parameter for the auctionDto function
+	 * @return void This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void newPlayersBid(AuctionDto auctionDto) {
 		logger.info("With in newPlayerBid");

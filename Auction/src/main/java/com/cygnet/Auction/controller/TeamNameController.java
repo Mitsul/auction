@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Controller class for TeamName
+ */
+
 package com.cygnet.Auction.controller;
 
 import java.util.List;
@@ -21,6 +29,12 @@ public class TeamNameController {
 
 	@Autowired TeamNameService teamNameService;
 	
+	/**
+	 * <b> Add Team Name : </b> This function is for adding the Team Name
+	 * @param teamNameDto Input type of the function addTeamName
+	 * @param err If the input type is failed as per the validation
+	 * @return String
+	 */
 	@PostMapping(value = "/admin/teamName/add")
 	public String addTeamName(@Valid @RequestBody TeamNameDto teamNameDto, Errors err) {
 		if(err.hasErrors())
@@ -29,6 +43,12 @@ public class TeamNameController {
 			return teamNameService.addTeamName(teamNameDto);
 	}
 	
+	/**
+	 * <b> Update Team Name : </b> This function is for updating the Team Name
+	 * @param teamNameDto Input type of the function addTeamName
+	 * @param err If the input type is failed as per the validation
+	 * @return String
+	 */
 	@PutMapping(value="/admin/teamName/update")
 	public String updateTeamName(@Valid @RequestBody TeamNameDto teamNameDto, Errors err) {
 		if(err.hasErrors())
@@ -37,11 +57,10 @@ public class TeamNameController {
 			return teamNameService.updateTeamName(teamNameDto);
 	}
 	
-//	@DeleteMapping(value = "/admin/teamName/delete/{teamNameId}")
-//	public String deleteTeamName(@PathVariable("teamNameId") String teamNameId) {
-//		return teamNameService.deleteTeamName(teamNameId);
-//	}
-	
+	/**
+	 * <b> Get all Team Name : </b> This function returns the list of teamName
+	 * @return List of TeamName
+	 */
 	@GetMapping(value = {"/admin/teamName/getAll", "/employee/teamName/getAll"})
 	public List<TeamName> getAllTeamName() {
 		return teamNameService.getAllTeamName();

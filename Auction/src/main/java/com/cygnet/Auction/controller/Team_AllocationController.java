@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Controller class for Team_Allocation
+ */
+
 package com.cygnet.Auction.controller;
 
 import java.util.List;
@@ -15,12 +23,21 @@ public class Team_AllocationController {
 
 	@Autowired Team_AllocationService team_AllocationService;
 	
+	/**
+	 * <b> Generate Team : </b> This function is for generating the  team
+	 * @return String
+	 */
 	@GetMapping(value = "/admin/generateTeam")
 	public String generateTeam() {
 		return team_AllocationService.generateTeam();
 	}
 	
-	@GetMapping(value = {"/admin/findByTeam/{teamId}", "/employee/captain/findByTeam/{teamId}", "/employee/findByTeam/{teamId}"})
+	/**
+	 * <b> Find by Team : </b> This function is for finding the players by team
+	 * @param teamId Input type of the function findByTeam
+	 * @return List of TeamwisePlayerDto
+	 */
+	@GetMapping(value = {"/admin/findByTeam/{teamId}", "/employee/findByTeam/{teamId}"})
 	public List<TeamwisePlayersDto> findByTeam(@PathVariable("teamId") String teamId) {
 		return team_AllocationService.findByTeam(teamId);
 	}

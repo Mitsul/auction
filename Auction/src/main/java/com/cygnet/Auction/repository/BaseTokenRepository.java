@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Repository class for BaseToken
+ */
+
 package com.cygnet.Auction.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

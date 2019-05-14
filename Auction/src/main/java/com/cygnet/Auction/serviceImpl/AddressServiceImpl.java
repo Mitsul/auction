@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the AddressService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import javax.persistence.OptimisticLockException;
@@ -28,6 +36,16 @@ public class AddressServiceImpl implements AddressService{
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
 
+	/**
+	 * <b> Add address : </b> This function is for adding the address of the employees
+	 * @param address This is the parameter for the addAddress function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String addAddress(AddressDto address) {
 		logger.info("With in add Address service");
 		Employee emp = employeeRepository.findById(address.getEmpId()).get();
@@ -49,6 +67,16 @@ public class AddressServiceImpl implements AddressService{
 		}
 	}
 
+	/**
+	 * <b> Update address : </b> This function is for updating the address of the employees
+	 * @param address This is the parameter for the updateAddress function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String updateAddress(AddressDto address) {
 		logger.info("With in update address");
 		Employee emp = employeeRepository.findById(address.getEmpId()).get();
@@ -64,6 +92,13 @@ public class AddressServiceImpl implements AddressService{
 		}
 	}
 
+	/**
+	 * <b> Get address : </b> This function is for getting the address of the employees
+	 * @param address This is the parameter for the addAddress function
+	 * @return ResponseAddressDto This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public ResponseAddressDto getAddress(String empId) {
 		logger.info("With in get ddress");
 		try {

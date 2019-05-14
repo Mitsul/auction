@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Controller class for Auction
+ */
+
 package com.cygnet.Auction.controller;
 
 import java.util.List;
@@ -31,11 +39,21 @@ public class AuctionController {
 	@Autowired AuctionService auctionService;
 	@Autowired PlayerServiceImpl playerService;
 	
+	/**
+	 * <b> Players for Bid : </b> This function returns the list of the players for bid
+	 * @return List of ResponsePlayersForBid
+	 */
 	@GetMapping(value = {"/employee/getPlayers","/admin/getPlayers"})
 	public List<ResponsePlayersForBid> getPlayersForBid() {
 		 return playerService.getPlayersForBid(0);
 	}
 	
+	/**
+	 * <b> Add address : </b> This function is for adding the address of the employees
+	 * @param auctionDto Input type of the function playerBid
+	 * @param err If the input type is failed as per the validation
+	 * @return String
+	 */
 	@PostMapping(value = {"/employee/captain/bid","/admin/captain/bid"})
 	public String playerBid(@Valid @RequestBody AuctionDto auctionDto, Errors err) {
 		logger.info("With in playerBid");

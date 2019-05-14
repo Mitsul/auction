@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Controller class for Team
+ */
+
 package com.cygnet.Auction.controller;
 
 import java.util.List;
@@ -18,15 +26,23 @@ public class TeamController {
 	static Logger log = LoggerFactory.getLogger(TeamController.class);
 	@Autowired TeamService teamService;
 	
+	/**
+	 * <b> Set team : </b> This function sets the team for the captains
+	 * @return String
+	 */
 	@PostMapping(value = "/admin/createTeam")
 	public String setTeam() {
 		
 		return teamService.setTeam();
 	}
 	
+	/**
+	 * <b> Get Teams : </b> This function returns the list of the team's
+	 * @return List of ResponseTeamDto
+	 */
 	@GetMapping(value = {"/admin/getTeam", "/employee/getTeam"})
 	public List<ResponseTeamDto> getTeam(){
-		log.info("in controller");
+		log.info("Within getTeam controller");
 		return teamService.getTeam();
 	}
 }

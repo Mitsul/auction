@@ -64,7 +64,7 @@ public class AuctionControllerTest {
 	public void getAllPlayersBid() throws Exception{
 		
 		when(playerService.getPlayersForBid(0)).thenReturn(responsePlayersForBid);
-	    mockMvc.perform(get("/employee/captain/getPlayers"))
+	    mockMvc.perform(get("/employee/getPlayers"))
 	            .andExpect(status().isOk())
 	            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 	            .andExpect(jsonPath("$", hasSize(responsePlayersForBid.size())))

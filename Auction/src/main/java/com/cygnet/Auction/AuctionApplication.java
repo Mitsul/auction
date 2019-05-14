@@ -4,19 +4,21 @@ import java.util.TimeZone;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cygnet.Auction.config.SwaggerConfig;
+
+@Import(SwaggerConfig.class)
 @RestController
 @SpringBootApplication
 @EnableTransactionManagement
 public class AuctionApplication {
 	
-	static Logger logger = LoggerFactory.getLogger(AuctionApplication.class);
+//	static Logger logger = LoggerFactory.getLogger(AuctionApplication.class);
 
 	@PostConstruct
 	  public void init(){
@@ -25,7 +27,6 @@ public class AuctionApplication {
 	  }
 
 	public static void main(String[] args) {
-		logger.info("Inside main class");
 		SpringApplication.run(AuctionApplication.class, args);
 		
 	}

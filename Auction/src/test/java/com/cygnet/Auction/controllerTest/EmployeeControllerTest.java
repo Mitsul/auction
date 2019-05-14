@@ -100,7 +100,7 @@ public class EmployeeControllerTest {
 		String jsonStr = Obj.writeValueAsString(employeeDto);
 		
 		when(employeeService.updateEmp(employeeDto)).thenReturn(employeeDto.toString());
-		mockMvc.perform(put("/admin/update/Emloyee")
+		mockMvc.perform(put("/admin/update/Employee")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonStr))
 		.andExpect(status().isOk());

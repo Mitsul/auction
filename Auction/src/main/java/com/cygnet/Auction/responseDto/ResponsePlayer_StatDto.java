@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the response dto for the Player_Stat
+ */
+
 package com.cygnet.Auction.responseDto;
 
 import lombok.AllArgsConstructor;

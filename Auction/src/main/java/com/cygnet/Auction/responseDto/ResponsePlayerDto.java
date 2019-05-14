@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the response dto for the player
+ */
+
 package com.cygnet.Auction.responseDto;
 
 import lombok.AllArgsConstructor;
@@ -19,4 +27,5 @@ public class ResponsePlayerDto {
 	private int isActive;
 	private int prefCaptain;
 	private String playerRole;
+	private String playerRoleId;
 }

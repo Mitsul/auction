@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the PlayerService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.sql.Timestamp;
@@ -34,6 +42,17 @@ public class PlayerServiceImpl implements PlayerService{
 	@Autowired private PlayerRoleRepository playerRoleRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
 
+	
+	/**
+	 * <b> Add player : </b> This function is for the registration of the employees as a player
+	 * @param playerDto This is the parameter for the addPlayer function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String addPlayer(PlayerDto playerDto) {
 		logger.info("With in addPlayer");
 		Employee emp = employeeRepository.findById(playerDto.getEmpId()).get();
@@ -60,6 +79,13 @@ public class PlayerServiceImpl implements PlayerService{
 		}
 	}
 
+	/**
+	 * <b> Get player : </b> This function returns the player based on the empId
+	 * @param empId This is the parameter for the getPlayer function
+	 * @return String This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public ResponsePlayerDto getPlayer(String empId) {
 		logger.info("With in getplayer");
 		try {
@@ -71,6 +97,16 @@ public class PlayerServiceImpl implements PlayerService{
 		}
 	}
 
+	/**
+	 * <b> Update Player : </b> This function is for updating the player
+	 * @param playerDto This is the parameter for the updatePlayer function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String updatePlayer(PlayerDto playerDto) {
 		try {
 			System.out.println("in player service impl update");
@@ -87,7 +123,12 @@ public class PlayerServiceImpl implements PlayerService{
 		}
 	}
 
-
+	/**
+	 * <b> Get Players for Bid : </b> This function returns the list of the players for bid
+	 * @return List<ResponsePlayersForBid> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<ResponsePlayersForBid> getPlayersForBid(int i) {
 		logger.info("With in getPlayersForBid");
 		try {

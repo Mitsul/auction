@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the Team_AllocationService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.text.DateFormat;
@@ -36,6 +44,13 @@ public class Team_AllocationServiceImpl implements Team_AllocationService{
 	@Autowired private TeamRepository teamRepository;
 	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
 	 
+	
+	/**
+	 * <b> Generate Team : </b> This function is for generating the team from the final bid by the players
+	 * @return String This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public String generateTeam() {
 		logger.info("With in generateTeam");
 		try {
@@ -66,6 +81,13 @@ public class Team_AllocationServiceImpl implements Team_AllocationService{
 		}
 	}
 
+	/**
+	 * <b> Team Wise Report : </b> This function is for getting the players for a particular team for particular period
+	 * @param reportDto This is the parameter for the findByTeamReport function
+	 * @return List<TeamwisePlayersDto> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	@Override
 	public List<TeamwisePlayersDto> findByTeamReport(ReportDto reportDto) {
 		logger.info("With in findByTeamReport");

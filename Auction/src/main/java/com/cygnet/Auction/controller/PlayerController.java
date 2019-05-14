@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Controller class for Player
+ */
+
 package com.cygnet.Auction.controller;
 
 import javax.validation.Valid;
@@ -20,6 +28,12 @@ public class PlayerController {
 
 	@Autowired PlayerService playerService;
 
+	/**
+	 * <b> Add Player : </b> This function is for the registration of the employee as a player
+	 * @param playerDto Input type of the function addPlayer
+	 * @param err If the input type is failed as per the validation
+	 * @return String
+	 */
 	@PostMapping(value= {"/employee/player/register","/admin/player/register"})
 	public String addPlayer(@Valid @RequestBody PlayerDto playerDto, Errors err) {
 		System.out.println("DTO: "+playerDto.toString());
@@ -29,15 +43,28 @@ public class PlayerController {
 			return playerService.addPlayer(playerDto);
 	}
 	
+	/**
+	 * <b> get Player : </b> This function is returns the player details by Id
+	 * @param empId Input type of the function getPlayer
+	 * @return ResponsePlayerDto
+	 */
 	@GetMapping(value= {"/employee/player/{empId}","/admin/player/{empId}"})
 	public ResponsePlayerDto getPlayer(@PathVariable("empId") String empId) {
 		return playerService.getPlayer(empId);
 	}
 	
+	/**
+	 * <b> Update Player : </b> This function is for updating the player details
+	 * @param playerDto Input type of the function updatePlayer
+	 * @param err If the input type is failed as per the validation
+	 * @return String
+	 */
 	@PutMapping(value= {"/employee/player/update","/admin/player/update"})
 	public String updatePlayer(@Valid @RequestBody PlayerDto playerDto, Errors err) {
-		if(err.hasErrors())
-			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();
+		if(err.hasErrors()) {
+			System.out.println(err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage());
+			return err.getFieldError().getField() + " " + err.getFieldError().getDefaultMessage();			
+		}
 		else
 			return playerService.updatePlayer(playerDto);
 	}

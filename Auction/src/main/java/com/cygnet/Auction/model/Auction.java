@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Model class for Auction
+ */
+
 package com.cygnet.Auction.model;
 import java.util.Date;
 import javax.persistence.Column;

@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Model class for TeamName
+ */
+
 package com.cygnet.Auction.model;
 
 import javax.persistence.Column;

@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Config class for JWTAuthorizationFilter
+ */
+
 package com.cygnet.Auction.config;
 
 import static com.cygnet.Auction.config.SecurityConstants.HEADER_STRING;

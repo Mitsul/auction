@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Config class for SecurityConstants
+ */
+
 package com.cygnet.Auction.config;
 
 public class SecurityConstants {

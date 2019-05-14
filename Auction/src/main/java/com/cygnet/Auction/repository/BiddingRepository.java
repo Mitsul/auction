@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Repository class for Bidding
+ */
+
 package com.cygnet.Auction.repository;
 import java.sql.Timestamp;
 import java.util.Date;

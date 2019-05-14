@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Controller class for Employee
+ */
+
 package com.cygnet.Auction.controller;
 
 import java.util.List;
@@ -37,6 +45,12 @@ public class EmployeeController {
 		}	
 	}
 	
+	/**
+	 * <b> Add Employee : </b> This function is for adding the new employee
+	 * @param emp Input type of the function addEmployee
+	 * @param err Input type of the function addEmployee
+	 * @return String
+	 */
 	@PostMapping(value = "/admin/addEmployee", produces = "text/plain")
 	public String addEmployee(@Valid @RequestBody EmployeeDto emp, Errors err) {
 		if(err.hasErrors())
@@ -45,11 +59,22 @@ public class EmployeeController {
 			return employeeService.addEmployee(emp);
 	}
 	
+	/**
+	 * <b> Get Employee : </b> This function returns the employee by Id
+	 * @param empId Input type of the function getEmpData
+	 * @return ResponseEmployeeDto
+	 */
 	@GetMapping(value= {"/admin/{empId}" ,"/employee/{empId}", "/admin/getEmployee/{empId}"})
 	public ResponseEmployeeDto getEmpData(@PathVariable("empId") String empId) {
 		return employeeService.getEmployee(empId);
 	}
 	
+	/**
+	 * <b> Update Employee : </b> This function is for updating the emp
+	 * @param emp Input type of the function updateEmp
+	 * @param err If the input type is failed as per the validation
+	 * @return String
+	 */
 	@PutMapping(value= {"admin/update" ,"/employee/update", "/admin/update/Employee"})
 	public String updateEmp(@Valid @RequestBody EmployeeDto emp, Errors err) {
 		if(err.hasErrors())
@@ -58,6 +83,10 @@ public class EmployeeController {
 			return employeeService.updateEmp(emp);
 	}
 	
+	/**
+	 * <b> List of Employee : </b> This function returns the list of employees
+	 * @return List of Employee
+	 */
 	@GetMapping(value = "/admin/getAllEmployee")
 	public List<Employee> getAllEmployee() {
 		return employeeService.getAllEmployee();

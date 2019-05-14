@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the response dto for the Timing
+ */
+
 package com.cygnet.Auction.responseDto;
 
 import java.util.Date;

@@ -1,4 +1,12 @@
- package com.cygnet.Auction.dto;
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Dto class for Address
+ */
+
+package com.cygnet.Auction.dto;
 
 import javax.validation.constraints.Size;
 

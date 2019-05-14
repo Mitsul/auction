@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the PlayerRoleService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.util.ArrayList;
@@ -26,6 +34,16 @@ public class PlayerRoleServiceImpl implements PlayerRoleService{
 	@Autowired PlayerRoleRepository playerRoleRepository;
 	@Autowired UuidAndTimeStamp uuidAndTimeStamp;
 	
+	/**
+	 * <b> Add PlayerRole : </b> This function is for adding the Player Role
+	 * @param playerRoleDto This is the parameter for the addPlayerRole function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	@Override
 	public String addPlayerRole(PlayerRoleDto playerRoleDto) {
 		logger.info("With in addPlayerRole");
@@ -43,28 +61,22 @@ public class PlayerRoleServiceImpl implements PlayerRoleService{
 		}
 		
 	}
-
-	@Override
-	public String deletePlayerRole(PlayerRoleDto playerRoleDto) {
-		logger.info("With in deletePlayerRole");
-		try {
-			playerRoleRepository.deleteById(playerRoleDto.getPlayerRoleId());
-			return "Player Role Deleted successfully";
-		}catch (OptimisticLockException | StaleObjectStateException | HibernateOptimisticLockingFailureException e) {
-			logger.error("Error with in deletePlayerRole :- " + e);
-			return "Please try again, due to exception of locking :-" + e;
-		}catch (Exception e){
-			logger.error("Error with in deletePlayerRoel :- " + e); 
-			return "Please try again, due to exception :-" + e;
-		}
-	}
-
+	
+	/**
+	 * <b> Update player Role : </b> This function is for updating the player role
+	 * @param playerRoleDto This is the parameter for the updatePlayerRole function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	@Override
 	public String updatePlayerRole(PlayerRoleDto playerRoleDto) {
 		logger.info("With in updatePlayerRole");
 		try {
-			PlayerRole playerRole = new PlayerRole(playerRoleDto.getPlayerRoleId(), playerRoleDto.getName());
-			playerRoleRepository.save(playerRole);
+			playerRoleRepository.updatePlayerRole(playerRoleDto.getPlayerRoleId(), playerRoleDto.getName());
 			return "Player Role Upedated Successfully";
 		}catch (OptimisticLockException | StaleObjectStateException | HibernateOptimisticLockingFailureException e) {
 			logger.error("Error with in updatePlayerRole :- " + e);
@@ -76,6 +88,13 @@ public class PlayerRoleServiceImpl implements PlayerRoleService{
 		
 	}
 
+	/**
+	 * <b> Get Player Role : </b> This function is returns the player role based on the player role id
+	 * @param id This is the parameter for the getPlayerRole function
+	 * @return PlayerRole This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	@Override
 	public PlayerRole getPlayerRole(String id) {
 		logger.info("With in getPlayerRole");
@@ -87,6 +106,12 @@ public class PlayerRoleServiceImpl implements PlayerRoleService{
 		}
 	}
 
+	/**
+	 * <b> Get all Player Roles : </b> This function returns the list of the player roles
+	 * @return List<PlayerRole> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	@Override
 	public List<PlayerRole> getAllPlayerRole() {
 		logger.info("With in getAllPlayerRole");

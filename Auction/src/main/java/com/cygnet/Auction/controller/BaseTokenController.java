@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> Controller class for BaseToken
+ */
+
 package com.cygnet.Auction.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +21,13 @@ public class BaseTokenController {
 
 	@Autowired private BaseTokenService baseTokenService;
 	
+	/**
+	 * <b> Generate Base Token : </b> This function generated the base token for all the players
+	 * @param baseTokenDto Input type of the function addPlayerRole
+	 * @return String
+	 */
 	@PostMapping(value = "/admin/generateBaseTokenForAllPlayers")
-	private String generateBaseTokenForAllPlayers(@RequestBody BaseTokenDto baseTokenDto){
+	public String generateBaseTokenForAllPlayers(@RequestBody BaseTokenDto baseTokenDto){
 		return baseTokenService.generateBaseTokenForAllPlayers(baseTokenDto);
 	}
 }

@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the service class for Team_Allocation
+ */
+
 package com.cygnet.Auction.service;
 
 import java.util.List;

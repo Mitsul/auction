@@ -1,3 +1,11 @@
+/**
+ * @author Mitsul
+ * @version 1.0
+ * @since 1.8
+ * 
+ * <b>Desc	: </b> This class is the implementation class of the BaseTokenService class
+ */
+
 package com.cygnet.Auction.serviceImpl;
 
 import java.util.List;
@@ -27,15 +35,17 @@ public class Captain_ReviewServiceImpl implements Captain_ReviewService {
 
 	static Logger logger = LoggerFactory.getLogger(Captain_ReviewServiceImpl.class);
 
-	@Autowired
-	private Captain_ReviewRepository captain_ReviewRepository;
-	@Autowired
-	private PlayerRepository playerRepository;
-	@Autowired
-	private EmployeeRepository employeeRepository;
-	@Autowired
-	private UuidAndTimeStamp uuidAndTimeStamp;
+	@Autowired private Captain_ReviewRepository captain_ReviewRepository;
+	@Autowired private PlayerRepository playerRepository;
+	@Autowired private EmployeeRepository employeeRepository;
+	@Autowired private UuidAndTimeStamp uuidAndTimeStamp;
 
+	/**
+	 * <b> Get Capatin's preference List : </b> This function return's the list of the players who have preferred as a captain
+	 * @return List<ResponsePlayersWithCapPrefDto> This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public List<ResponsePlayersWithCapPrefDto> getCaptainPrefList() {
 		logger.info("With in getCaptainPrefList");
 		try {
@@ -46,6 +56,16 @@ public class Captain_ReviewServiceImpl implements Captain_ReviewService {
 		}
 	}
 
+	/**
+	 * <b> Give Review : </b> This function for giving the review to the players who opted as a captain
+	 * @param captain_ReviewDto This is the parameter for the giveReview function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String giveReview(Captain_ReviewDto captain_ReviewDto) {
 		logger.info("With in giveReview"); 
 		Player player = playerRepository.findByEmployee(employeeRepository.findByEmpId(captain_ReviewDto.getEmpId()));
@@ -69,6 +89,13 @@ public class Captain_ReviewServiceImpl implements Captain_ReviewService {
 		 
 	}
 
+	/**
+	 * <b> Get Review : </b> This function is for adding the address of the employees
+	 * @param empId This is the parameter for the getReview function
+	 * @return ResponseGetCaptainReview This is the return of the function
+	 * @exception e This are the exceptions for the function
+	 * @see e
+	 */
 	public ResponseGetCaptainReview getReview(String empId) {
 		logger.info("With in getReview");
 		try {
@@ -79,6 +106,16 @@ public class Captain_ReviewServiceImpl implements Captain_ReviewService {
 		}
 	}
 
+	/**
+	 * <b> Update Review : </b> This function is for updating the review of the player
+	 * @param captain_ReviewDto This is the parameter for the updateReview function
+	 * @return String This is the return of the function
+	 * @exception OptimisticLockException,StaleObjectStateException,HibernateOptimisticLockingFailureException, e This are the exceptions for the function
+	 * @see OptimisticLockException
+	 * @see StaleObjectStateException
+	 * @see HibernateOptimisticLockingFailureException
+	 * @see e
+	 */
 	public String updateReview(Captain_ReviewDto captain_ReviewDto) {
 		Player player = playerRepository.findByEmployee(employeeRepository.findByEmpId(captain_ReviewDto.getEmpId()));
 		Player captainPref = playerRepository.findByEmployee(employeeRepository.findByEmpId(captain_ReviewDto.getEmpCapRef()));
