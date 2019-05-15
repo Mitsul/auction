@@ -109,6 +109,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 		.and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager(), customUserDetailService))
 		.addFilter(new JWTAuthorizationFilter(authenticationManager(), customUserDetailService));
+//		.sessionManagement()
+//		.maximumSessions(1)
+//		.maxSessionsPreventsLogin(true);
 		//.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
 		
 		http.headers().frameOptions().disable();

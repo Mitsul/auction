@@ -63,7 +63,7 @@ public class AuctionControllerTest {
 	@Test
 	public void getAllPlayersBid() throws Exception{
 		
-		when(playerService.getPlayersForBid(0)).thenReturn(responsePlayersForBid);
+		when(playerService.getPlayersForBid()).thenReturn(responsePlayersForBid);
 	    mockMvc.perform(get("/employee/getPlayers"))
 	            .andExpect(status().isOk())
 	            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -86,7 +86,7 @@ public class AuctionControllerTest {
 	            .andExpect(jsonPath("$[2].lastBidderId", is(responsePlayersForBid.get(2).getLastBidderId())))
 //	            .andExpect(jsonPath("$[2].lastBidderAmt", is(responsePlayersForBid.get(2).getLastBidderAmt())))
 	            .andExpect(jsonPath("$[2].playerRole", is(responsePlayersForBid.get(2).getPlayerRole())));
-	    verify(playerService, times(1)).getPlayersForBid(0);
+	    verify(playerService, times(1)).getPlayersForBid();
 	    verifyNoMoreInteractions(playerService);
 	}
 }

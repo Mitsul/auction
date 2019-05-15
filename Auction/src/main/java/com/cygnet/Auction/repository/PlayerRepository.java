@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 import com.cygnet.Auction.model.Employee;
 import com.cygnet.Auction.model.Player;
 import com.cygnet.Auction.model.PlayerRole;
+import com.cygnet.Auction.responseDto.ResponseNumericDto;
 import com.cygnet.Auction.responseDto.ResponsePlayerDto;
 import com.cygnet.Auction.responseDto.ResponsePlayersWithCapPrefDto;
 import com.cygnet.Auction.responseDto.ResponsePlayersForBid;
@@ -45,8 +46,11 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
 	Player findByPlayerId(String playerId); // for captain_reviewService
 
 	List<Player> getPlayersForBid(int flag); // used for named query
-	List<ResponsePlayersForBid> getPlayersForBidInAuction(int flag); // used for named query
+	List<ResponsePlayersForBid> getPlayersForBidInAuction(); // used for named query
 
 	Player findByEmployee(Employee emp);
+
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseNumericDto(count(p)) from Player p where p.isActive = 1")
+	ResponseNumericDto getTotalActivePlayersCount();
 	
 }

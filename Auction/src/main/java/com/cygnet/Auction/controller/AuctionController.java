@@ -45,7 +45,7 @@ public class AuctionController {
 	 */
 	@GetMapping(value = {"/employee/getPlayers","/admin/getPlayers"})
 	public List<ResponsePlayersForBid> getPlayersForBid() {
-		 return playerService.getPlayersForBid(0);
+		 return playerService.getPlayersForBid();
 	}
 	
 	/**

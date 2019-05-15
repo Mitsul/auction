@@ -22,10 +22,13 @@ import com.cygnet.Auction.dto.ReturnCapFromCapReviewDto;
 import com.cygnet.Auction.dto.TeamwisePlayersDto;
 import com.cygnet.Auction.responseDto.ResponseAllBidsByCaptains;
 import com.cygnet.Auction.responseDto.ResponseCaptainListWithTeam;
+import com.cygnet.Auction.responseDto.ResponseNumericDto;
 import com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto;
 import com.cygnet.Auction.responseDto.ResponsePlayersFromCaptainDto;
 import com.cygnet.Auction.service.AuctionService;
 import com.cygnet.Auction.service.CaptainService;
+import com.cygnet.Auction.service.EmployeeService;
+import com.cygnet.Auction.service.PlayerService;
 import com.cygnet.Auction.service.Player_StatService;
 import com.cygnet.Auction.service.TeamService;
 import com.cygnet.Auction.service.Team_AllocationService;
@@ -38,6 +41,8 @@ public class ReportController {
 	@Autowired private AuctionService auctionService;
 	@Autowired private Team_AllocationService team_AllocationService;
 	@Autowired private Player_StatService player_StatService;
+	@Autowired private EmployeeService employeeService;
+	@Autowired private PlayerService playerService;
 	
 	/**
 	 * <b> Players opted as captain with review : </b> This function returns the list of the players who opted as captain with the reviews for a particular tournament
@@ -124,5 +129,59 @@ public class ReportController {
 	@GetMapping(value = {"/admin/highestManOfTheMatch","/employee/highestManOfTheMatch"})
 	public List<ResponsePlayerStatReportDto> highestManofTheMatch(){
 		return player_StatService.highestManofTheMatch();
+	}
+	
+	/**
+	 * <b> Total count of the employees : </b> This function returns the total count of the employees
+	 * @return ResponseNumericDto
+	 */
+	@GetMapping(value = {"/admin/getTotalEmployeesCount","/employee/getTotalEmployeesCount"})
+	public ResponseNumericDto getTotalEmployeesCount() {
+		return employeeService.getTotalEmployeesCount();
+	}
+	
+	/**
+	 * <b> Total count of the players : </b> This function returns the total count of the players
+	 * @return ResponseNumericDto
+	 */
+	@GetMapping(value = {"/admin/getTotalPlayersCount","/employee/getTotalCount"})
+	public ResponseNumericDto getTotalPlayersCount() {
+		return playerService.getTotalPlayersCount();
+	}
+	
+	/**
+	 * <b> Total count of the players : </b> This function returns the total count of the active players
+	 * @return ResponseNumericDto
+	 */
+	@GetMapping(value = {"/admin/getTotalActivePlayersCount","/employee/getTotalActivePlayersCount"})
+	public ResponseNumericDto getTotalActivePlayersCount() {
+		return playerService.getTotalActivePlayersCount();
+	}
+	
+	/**
+	 * <b> Total Runs : </b> This function returns the total runs
+	 * @return ResponseNumericDto
+	 */
+	@GetMapping(value = {"/admin/getTotalRuns","/employee/getTotalRuns"})
+	public ResponseNumericDto getTotalRuns() {
+		return player_StatService.getTotalRuns();
+	}
+	
+	/**
+	 * <b> Total Wickets : </b> This function returns the total wickets
+	 * @return ResponseNumericDto
+	 */
+	@GetMapping(value = {"/admin/getTotalWickets","/employee/getTotalWickets"})
+	public ResponseNumericDto getTotalWickets() {
+		return player_StatService.getTotalWickets();
+	}
+	
+	/**
+	 * <b> Total Man of the Match : </b> This function returns the total man of the match
+	 * @return ResponseNumericDto
+	 */
+	@GetMapping(value = {"/admin/getTotalManOfTheMatch","/employee/getTotalManOfTheMatch"})
+	public ResponseNumericDto getTotalManOfTheMatch() {
+		return player_StatService.getTotalManOfTheMatch();
 	}
 }

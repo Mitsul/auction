@@ -19,6 +19,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 
 import com.cygnet.Auction.model.Player_Stat;
+import com.cygnet.Auction.responseDto.ResponseNumericDto;
 import com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto;
 import com.cygnet.Auction.responseDto.ResponsePlayer_StatDto;
 
@@ -36,12 +37,21 @@ public interface Player_StatRepository extends JpaRepository<Player_Stat, String
 	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayer_StatDto(p.playerStatId,p.employee.empId,p.employee.name,p.employee.gender,p.totalRuns,p.totalWick,p.manOfTheMatch) from Player_Stat p")
 	List<ResponsePlayer_StatDto> findAllPlayerStat();
 
-	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto(empId, employee.name, totalRuns) from Playe_Stat order by totalRuns desc limit 10", nativeQuery = true)
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto(p.employee.empId, p.employee.name, p.totalRuns) from Player_Stat p order by p.totalRuns desc")
 	List<ResponsePlayerStatReportDto> playersWithHighestRuns();
 
-	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto(empId, employee.name, manOfTheMatch) from Playe_Stat order by manOfTheMatch desc limit 10", nativeQuery = true)
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto(p.employee.empId, p.employee.name, p.manOfTheMatch) from Player_Stat p order by p.manOfTheMatch desc")
 	List<ResponsePlayerStatReportDto> playersWithHighestManOfTheMatch();
 
-	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto(empId, employee.name, totalWick) from Playe_Stat order by totalWick desc limit 10", nativeQuery = true)
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto(p.employee.empId, p.employee.name, p.totalWick) from Player_Stat p order by p.totalWick desc")
 	List<ResponsePlayerStatReportDto> playersWithHighestWickets();
+
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseNumericDto(sum(p.totalRuns)) from Player_Stat p")
+	ResponseNumericDto getTotalRuns();
+
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseNumericDto(sum(p.totalWick)) from Player_Stat p")
+	ResponseNumericDto getTotalWIckets();
+
+	@Query(value = "select new com.cygnet.Auction.responseDto.ResponseNumericDto(sum(p.manOfTheMatch)) from Player_Stat p")
+	ResponseNumericDto getTotalManOfTheMatch();
 }

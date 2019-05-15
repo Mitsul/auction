@@ -13,6 +13,7 @@ import java.util.List;
 import com.cygnet.Auction.dto.EmployeeDto;
 import com.cygnet.Auction.model.Employee;
 import com.cygnet.Auction.responseDto.ResponseEmployeeDto;
+import com.cygnet.Auction.responseDto.ResponseNumericDto;
 
 public interface EmployeeService {
 
@@ -22,4 +23,5 @@ public interface EmployeeService {
 	public String updateEmp(EmployeeDto emp);
 	public Employee findByEmail(String email);
 	public List<Employee> getAllEmployee();
+	public ResponseNumericDto getTotalEmployeesCount();
 }

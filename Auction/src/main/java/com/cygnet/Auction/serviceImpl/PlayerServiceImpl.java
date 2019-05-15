@@ -27,6 +27,7 @@ import com.cygnet.Auction.model.PlayerRole;
 import com.cygnet.Auction.repository.EmployeeRepository;
 import com.cygnet.Auction.repository.PlayerRepository;
 import com.cygnet.Auction.repository.PlayerRoleRepository;
+import com.cygnet.Auction.responseDto.ResponseNumericDto;
 import com.cygnet.Auction.responseDto.ResponsePlayerDto;
 import com.cygnet.Auction.responseDto.ResponsePlayersForBid;
 import com.cygnet.Auction.service.PlayerService;
@@ -129,14 +130,29 @@ public class PlayerServiceImpl implements PlayerService{
 	 * @exception e This are the exceptions for the function
 	 * @see e
 	 */
-	public List<ResponsePlayersForBid> getPlayersForBid(int i) {
+	public List<ResponsePlayersForBid> getPlayersForBid() {
 		logger.info("With in getPlayersForBid");
 		try {
-			return playerRepository.getPlayersForBidInAuction(i);
+			return playerRepository.getPlayersForBidInAuction();
 		}catch (Exception e){
 			logger.error("Error with in getPlayersForBid :- " + e);
 			return null;
 		}
 	}
 
+	/**
+	 * <b> Total count of the players : </b> This function returns the total count of the players
+	 * @return ResponseNumericDto
+	 */
+	public ResponseNumericDto getTotalPlayersCount() {
+		return new ResponseNumericDto(playerRepository.count());
+	}
+
+	/**
+	 * <b> Total count of the players : </b> This function returns the total count of the active players
+	 * @return ResponseNumericDto
+	 */
+	public ResponseNumericDto getTotalActivePlayersCount() {
+		return playerRepository.getTotalActivePlayersCount();
+	}
 }

@@ -27,6 +27,7 @@ import com.cygnet.Auction.model.Player_Stat;
 import com.cygnet.Auction.repository.EmployeeRepository;
 import com.cygnet.Auction.repository.Player_StatRepository;
 import com.cygnet.Auction.responseDto.ResponseEmployeeDto;
+import com.cygnet.Auction.responseDto.ResponseNumericDto;
 import com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto;
 import com.cygnet.Auction.responseDto.ResponsePlayer_StatDto;
 import com.cygnet.Auction.service.Player_StatService;
@@ -167,6 +168,30 @@ public class Player_StatServiceImpl implements Player_StatService{
 	 */
 	public List<ResponsePlayerStatReportDto> highestWickets() {
 		return player_StatRepository.playersWithHighestWickets();
+	}
+
+	/**
+	 * <b> Total Runs : </b> This function returns the total runs
+	 * @return ResponseNumericDto
+	 */
+	public ResponseNumericDto getTotalRuns() {
+		return player_StatRepository.getTotalRuns();
+	}
+
+	/**
+	 * <b> Total Wickets : </b> This function returns the total wickets
+	 * @return ResponseNumericDto
+	 */
+	public ResponseNumericDto getTotalWickets() {
+		return player_StatRepository.getTotalWIckets();
+	}
+
+	/**
+	 * <b> Total Man of the Match : </b> This function returns the total man of the match
+	 * @return ResponseNumericDto
+	 */
+	public ResponseNumericDto getTotalManOfTheMatch() {
+		return player_StatRepository.getTotalManOfTheMatch();
 	}
 	
 }

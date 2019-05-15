@@ -34,6 +34,7 @@ import com.cygnet.Auction.dto.EmployeeDto;
 import com.cygnet.Auction.model.Employee;
 import com.cygnet.Auction.repository.EmployeeRepository;
 import com.cygnet.Auction.responseDto.ResponseEmployeeDto;
+import com.cygnet.Auction.responseDto.ResponseNumericDto;
 import com.cygnet.Auction.service.EmployeeService;
 import com.cygnet.Auction.util.UuidAndTimeStamp;
 
@@ -211,6 +212,15 @@ public class EmployeeServiceImpl implements EmployeeService{
 			logger.error("Error with in getAllEmployees :- " + e);
 			return null; 
 		}
+	}
+
+	/**
+	 * <b> Total count of the employees : </b> This function returns the total count of the employees
+	 * return ResponseNumericDto
+	 */
+	public ResponseNumericDto getTotalEmployeesCount() {
+		long data = employeeRepository.count();
+		return new ResponseNumericDto(data);
 	}
 
 }

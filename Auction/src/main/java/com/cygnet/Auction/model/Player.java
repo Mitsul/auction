@@ -46,7 +46,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "Player")
 @NamedQuery(name = "Player.getPlayersForBid" , query = "select p from Player p where prefCaptain = :flag")
-@NamedQuery(name = "Player.getPlayersForBidInAuction" , query = "select new com.cygnet.Auction.responseDto.ResponsePlayersForBid(p.employee.empId , p.playerId, p.employee.name,coalesce(b.captain.capId,'N/A') as lastBidder , coalesce(b.currBidPrice, 0.0) as lastBidderAmt, coalesce(p.playerRole.name,'N/A') as player) from Player p left join Bidding b on p.playerId = b.player.playerId where p.prefCaptain = :flag and (b.currBidPrice is null or b.currBidPrice > 0.0) and (b.captain.capId is null or b.captain.capId is not null) and (p.playerRole is null or p.playerRole is not null)")
+@NamedQuery(name = "Player.getPlayersForBidInAuction" , query = "select new com.cygnet.Auction.responseDto.ResponsePlayersForBid(p.employee.empId , p.playerId, p.employee.name,coalesce(b.captain.capId,'N/A') as lastBidder , coalesce(b.currBidPrice, 0.0) as lastBidderAmt, coalesce(p.playerRole.name,'N/A') as player) from Player p left join Bidding b on p.playerId = b.player.playerId where p.prefCaptain = 0 and p.isActive = 1 and (b.currBidPrice is null or b.currBidPrice > 0.0) and (b.captain.capId is null or b.captain.capId is not null) and (p.playerRole is null or p.playerRole is not null)")
 public class Player{
 	
 	@Id

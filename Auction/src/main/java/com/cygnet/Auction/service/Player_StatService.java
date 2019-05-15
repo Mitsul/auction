@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.cygnet.Auction.dto.Player_StatDto;
 import com.cygnet.Auction.responseDto.ResponseEmployeeDto;
+import com.cygnet.Auction.responseDto.ResponseNumericDto;
 import com.cygnet.Auction.responseDto.ResponsePlayerStatReportDto;
 import com.cygnet.Auction.responseDto.ResponsePlayer_StatDto;
 
@@ -25,4 +26,7 @@ public interface Player_StatService {
 	public List<ResponsePlayerStatReportDto> highestRuns();
 	public List<ResponsePlayerStatReportDto> highestManofTheMatch();
 	public List<ResponsePlayerStatReportDto> highestWickets();
+	public ResponseNumericDto getTotalRuns();
+	public ResponseNumericDto getTotalWickets();
+	public ResponseNumericDto getTotalManOfTheMatch();
 }
